@@ -1,0 +1,32 @@
+<%# 新規案件登録画面 %>
+
+<h2>案件を登録</h2>
+<%= form_with model: @project, url: admin_projects_path do |f| %>
+  <div>
+    <%= f.label :title, "案件名" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :work_date, "日付" %>
+    <%= f.date_field :work_date %>
+  </div>
+  </div>
+    <%= f.label :start_time, "開始時間" %>
+    <%= f.time_field :start_time %>
+  </div>
+  </div>
+    <%= f.label :end_time, "終了時間" %>
+    <%= f.time_field :end_time %>
+  </div>
+  </div>
+    <%= f.label :location, "場所" %>
+    <%= f.time_field :location %>
+  </div>
+  <div>
+    <%= f.label :required_number, "必要人数" %>
+    <%= f.number_field :required_number %>
+  </div>
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

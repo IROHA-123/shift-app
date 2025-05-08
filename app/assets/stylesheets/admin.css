@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.admin-container {
+  display: flex;
+}
+
+/* -------------------- header -------------------- */
+
+.admin-container header {
+  padding: 20px;
+  width: 120px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #DDDDDD, #B8B9BC);
+  text-align: center;
+  user-select: none;
+}
+
+.link-mypage {
+  padding: 60px 10px;
+  border-bottom: solid 1px #9C9C9C;
+  margin-bottom: 50px;
+}
+
+.admin-links {
+  margin-bottom: 50px;
+  /* cursor: pointer; */
+}
+
+.admin-container header nav div span {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.link-logout {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+}
+
+/* --------------- main-container ----------------- */
+.admin-container .main-container {
+  margin:30px;
+}

@@ -1,0 +1,14 @@
+<div
+  class="modal hidden"
+  data-modal-target="modal"
+  data-action="click->modal#close">        <!-- バックドロップクリックで閉じる -->
+
+  <div
+    class="modal-content"
+    data-action="click->modal#stop">       <!-- 中身クリック時は伝播を止める -->
+
+    <div data-modal-target="body">
+      <!-- ここに中身を挿入-->
+    </div>
+  </div>
+</div>

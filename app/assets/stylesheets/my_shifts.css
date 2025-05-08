@@ -1,0 +1,12 @@
+.my-shift-wrapper {
+  padding: 30px;
+}
+
+.shift-table {
+  width: 100%;
+}
+
+.shift-table th {
+  border: solid 1px #ccc;
+  font-size: 12px;
+}

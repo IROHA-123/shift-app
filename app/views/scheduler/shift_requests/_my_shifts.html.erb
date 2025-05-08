@@ -1,0 +1,38 @@
+<div class="my-shift-wrapper">
+
+  <h2>マイシフト　<%= current_user.name %>さん</h2>
+
+  <h3>勤務予定日です。</h3>
+  <% if @shift_assignments.any? %>
+    <% @shift_assignments.each do |sa| %>
+      <div class="shift-card">
+        <p>
+          <%= japanese_date_with_weekday(sa.project.work_date) %>
+          <%= "#{sa.project.start_time.strftime('%H:%M')}〜#{sa.project.end_time.strftime('%H:%M')}" %>
+          <%= sa.project.location %>
+          <%= sa.project.title %>
+        </p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>勤務予定はありません。</p>
+  <% end %>
+
+  <h3>シフト提出日です。（未確定）</h3>
+    <%= debug @shift_requests %>
+  <% if @shift_requests.any? %>
+    <% @shift_requests.each do |sr| %>
+      <div class="shift-card">
+        <p>
+          <%= japanese_date_with_weekday(sr.project.work_date) %>
+          <%= "#{sr.project.start_time.strftime('%H:%M')}〜#{sr.project.end_time.strftime('%H:%M')}" %>
+          <%= sr.project.location %>
+          <%= sr.project.title %>
+        </p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>提出済みのシフトはありません。</p>
+  <% end %>
+
+</div>

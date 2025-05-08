@@ -1,0 +1,33 @@
+<%# app/views/scheduler/shift_requests/_shift_preferences.html.erb %>
+<h2>シフト希望を入力</h2>
+<table class="shift-table">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>案件名</th>
+      <th>希望</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.work_date %></td>
+        <td><%= project.title %></td>
+        <td>
+          <% current_status = @shift_requests[project.id]&.status %>
+          <%= form_with url: scheduler_shift_requests_path,
+                        method: :post,
+                        local: true,
+                        class: "preference-form" do |f| %>
+            <%= f.hidden_field :project_id, value: project.id %>
+            <%= f.select :status,
+                          [["OK","ok"],["NG","ng"]],
+                          { selected: current_status },
+                          class: "status-select" %>
+            <%= f.submit "送信", class: "status-submit" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

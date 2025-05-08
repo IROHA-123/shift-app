@@ -1,0 +1,12 @@
+<%# 従業員（User）登録画面 %>
+
+<h2>従業員を登録</h2>
+<%= form_with model: @user, url: admin_users_path do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

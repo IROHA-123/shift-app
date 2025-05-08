@@ -1,0 +1,41 @@
+<% projects.each do |project| %>
+  <!-- 閉じるボタン -->
+  <button
+    class="modal-close"
+    data-action="click->modal#close">
+    <%= image_tag "menu__close", alt: "close", class: "btn-modal-close" %>
+  </button>
+
+  <!-- 日付 -->
+  <div class="modal-date">
+    <%= japanese_date_with_weekday(project.work_date) %>
+  </div>
+  <!-- 時間帯 -->
+  <div class="modal-time">
+    <%= project.start_time.strftime("%H:%M") %>〜<%= project.end_time.strftime("%H:%M") %>
+  </div>
+  <!-- 場所 -->
+  <div class="modal-location">
+    <%= project.location %>
+  </div>
+  <!-- 残り人数 -->
+  <% remaining = project.required_number - project.shift_assignments.count %>
+  <div class="modal-remaining">
+    <span class="bubble">あと<%= remaining %>人<br>手伝ってください！🙏</span>
+  </div>
+  <!-- OK／NG ボタン -->
+  <div class="form-shift">
+    <%= form_with url: scheduler_shift_requests_path, method: :post, local: true do |f| %>
+      <p class="actions-title">あなたのシフト希望</p>
+      <%= f.hidden_field :project_id, value: project.id %>
+      <div class="actions-buttons">
+        <%= button_tag name: "status", value: "ng", class: "btn btn--ng" do %>
+          <%= image_tag "ng.svg", alt: "ng" %><p>勤務NG</p>
+        <% end %>
+        <%= button_tag name: "status", value: "ok", class: "btn btn--ok" do %>
+          <%= image_tag "ok.svg", alt: "ok" %><p>勤務できます</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

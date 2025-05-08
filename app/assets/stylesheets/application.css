@@ -1,0 +1,15 @@
+/* application.cssは、importのみ記述 */
+/* -------------------------------------------- */
+
+@import "destyle.css";
+@import "main.css";
+@import "admin.css";
+@import "scheduler.css";
+@import "my_shifts.css";
+
+/* -------------------------------------------- */
+/*
+ *= require_tree .
+ *= require_self
+ */
+

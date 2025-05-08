@@ -1,0 +1,65 @@
+<!--すべてに共通するhtml-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShiftApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%# Google Fonts ----------------------%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <%# css -------------------------------%>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# javaScript ------------------------%>
+    <%= javascript_importmap_tags %>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  </head>
+
+
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+
+    <%# javaScript ------------------------%>
+    <%= javascript_include_tag "application", type: "module" %>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("turbo:load", function () {
+        const swiper = new Swiper(".swiper-main", {
+          loop: false,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          // スワイプでタブ間を自由に行き来できるように
+          allowTouchMove: true,
+          // ナビゲーションと連動したい場合
+          on: {
+            slideChange: function () {
+              const navItems = document.querySelectorAll(".tab-nav .nav-item")
+              navItems.forEach(item => item.classList.remove("active"))
+              navItems[this.activeIndex].classList.add("active")
+            }
+          }
+        })
+
+        // ナビゲーションタップでも切り替える
+        document.querySelectorAll(".tab-nav .nav-item").forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            swiper.slideTo(index)
+          })
+        })
+      })
+    </script>
+
+  </body>
+</html>

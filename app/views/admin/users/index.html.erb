@@ -1,0 +1,41 @@
+<%# 
+  管理者が日付・案件ごとに、誰が「OK / NG」かを一覧で見られる
+  管理者が「この人に決定」と選んで確定できる
+  勤務が確定したら ShiftAssignmentとして保存される
+%>
+
+<h2>希望一覧とシフト確定</h2>
+
+<% (@projects || []).each do |project| %>
+  <h3><%= project.work_date %> - <%= project.title %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>従業員名</th>
+        <th>シフト希望</th>
+        <th>確定</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <% request = project.shift_requests.find { |r| r.user_id == user.id } %>
+        <% assigned = project.shift_assignments.any? { |a| a.user_id == user.id } %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= request&.status || "未提出" %></td>
+          <td><%= assigned ? "✔️" : "未" %></td>
+          <td>
+            <% unless assigned %>
+              <%= form_with url: manager_shift_path(project), method: :patch do %>
+                <%= hidden_field_tag :user_id, user.id %>
+                <%= hidden_field_tag :project_id, project.id %>
+                <%= submit_tag "確定" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,46 @@
+<div class="scheduler-container">
+
+  <div class="scheduler-wrapper">
+
+    <header class="header-wrapper">
+      <div class="scheduler-header">
+        <h1>Lumière Shift Scheduler</h1>
+      </div>
+      <div  class="tab-nav">
+        <div class="nav-item active">カレンダー</div>
+        <div class="nav-item">マイシフト</div>
+      </div>
+    </header>
+
+    <!--コントローラーの制御範囲を定義（カレンダー全体）-->
+    <div data-controller="modal">
+
+      <!--Swiper --------------------------------------------->
+      <div class="swiper swiper-main">
+        <div class="swiper-wrapper">
+          
+            <!--カレンダー画面 ---------------------------------->
+            <div class="swiper-slide">
+              <%= render partial: "calendar_view",
+                          locals: { calendar_days: @calendar_days,projects_by_date: @projects_by_date } %>
+            </div>
+          
+            <!--マイシフト画面 ---------------------------------->
+            <div class="swiper-slide">
+              <%= render partial: "my_shifts",
+                          locals: { shift_assignments: @shift_assignments,shift_requests: @shift_requests } %>
+            </div>
+
+        </div>
+      </div>
+      <!--Swiper --------------------------------------------->
+
+      <!-- モーダル -->
+      <%= render partial:"modal_projects"  %>
+
+
+    </div>
+
+
+  </div>
+</div>

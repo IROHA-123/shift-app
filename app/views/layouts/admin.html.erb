@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shift Manager</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <div class="admin-container">
+      <%# --------header------------------------------------------------------------- %>
+      <header>
+        <nav>
+          <% if user_signed_in? %>
+          <%# <h1>Shift Manager（管理画面）</h1> %>
+          <div class="link-mypage">
+            <%# <%= link_to destroy_user_session_path, method: :delete do %> 
+              <%= image_tag "icon__mypage.svg", alt:"マイページ" %>
+            <%# <% end %> 
+          </div>
+          <div class="admin-links link-shift">
+            <%# <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= image_tag "icon__shift.svg", alt:"シフト予定" %>
+              <span>シフト<br>予定</span>
+            <%# <% end %>
+          </div>
+          <div class="admin-links link-addProject">
+            <%# <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= image_tag "icon__plus.svg", alt:"案件登録" %>
+              <span>案件登録</span>
+            <%# <% end %> 
+          </div>
+          <div class="admin-links link-users">
+            <%# <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= image_tag "icon__user.svg", alt:"ユーザー管理" %>
+              <span>ユーザー<br>管理</span>
+            <%# <% end %> 
+          </div>
+          <% end %>
+          <div class="link-logout">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <%= image_tag "icon__logout.svg", alt:"ログアウト" %>
+            <% end %>
+          </div>
+        </nav>
+      </header>
+      <%# --------main------------------------------------------------------------- %>
+      <main>
+        <div class="main-container">
+          <%= yield %>
+        </div>
+      </main>
+    
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* -------------------------------------------- */
+
+:root {
+  --primary1-color:#EDF7FB;
+  --primary2-color:#D0ECF9;
+  --primary3-color:#B4E0F2;
+  --primary4-color:#7DCFF2;
+  --primary5-color:#3AB0E3;
+  --primary6-color:#2993C1;
+  --primary7-color:#0A719D;
+  --secondary1--color:#F5F4F5;
+  --secondary2--color:#E0DFE0;
+  --secondary3--color:#DAD7DA;
+  --secondary4--color:#BEBBBE;
+  --secondary5--color:#AEABAE;
+  --secondary6--color:#767476;
+  --secondary7--color:#403C40;
+  --secondary8--color:#302C30;
+  --secondary9--color:#333133;
+  --accent-red7-color:#c12026;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  color: var(--secondary9--color);
+}
+
+/* -------------------------------------------- */
+
+
+
+/* devise ログイン成功などの通知メッセージ */
+.notice {
+  color: green;
+}
+/* devise ログインエラーやユーザー登録エラーなどの警告メッセージ */
+.alert {
+  color: red;
+}
