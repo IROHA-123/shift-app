@@ -1,24 +1,28 @@
-# README
+# シフト管理アプリ（Shift Manager & Scheduler）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アプリ概要
+大学生の時にアルバイトをしていたレストランのシフト管理が大変そうだったことを思い起こし、課題解決のモデルにしました。
+従業員がスマホから勤務希望を提出＆確認でき、
+管理者が案件ごとの希望人数と配置状況を確認できるWebアプリです。
 
-Things you may want to cover:
+## レストラン Lumiere 概要
+- 都内にある、8階まであるビルがある高級レストランです。
+- 結婚披露宴場や各種宴会場としての場所も提供しており、それらのホールスタッフをアルバイトとして雇っています。
+- 部屋数（勤務場所）の種類が多いこと、案件の種類が多い、従業員の数が多いこと、案件ごとに適切な人数を振り分ける必要がある等で、手動でのシフト管理が煩雑になっていました。
 
-* Ruby version
+## 使用技術
+- Ruby on Rails
+- Stimulus
+- CSS (Vanilla)
 
-* System dependencies
+## 主な機能
+- カレンダーUIでのシフト表示
+- 希望入力機能（スマホ最適化）
+- 募集人数と希望者数の可視化
 
-* Configuration
+## GitHub上でできないこと
+- 本アプリは開発中のため、環境構築が必要です（Heroku等へのデプロイ予定なし）
+- UI全体や設計の意図についてはNotionページをご参照ください。
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Notionリンク
+[→ ポートフォリオページはこちら](https://xxx.notion.site/xxx)
