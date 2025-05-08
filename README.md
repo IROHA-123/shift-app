@@ -25,4 +25,4 @@
 - UI全体や設計の意図についてはNotionページをご参照ください。
 
 ## Notionリンク
-[→ ポートフォリオページはこちら](https://xxx.notion.site/xxx)
+[→ ポートフォリオページはこちら](https://icy-chess-6c8.notion.site/1edae901d26680d0b9aefdea66c9ac14)
