@@ -7,7 +7,7 @@
 **🕒 所要時間　：　約３週間**<br>
 👤 **協力者　　：　 Copilot, ChatGPT**
 
-## ⚙️ 使用技術
+### ⚙️ 使用技術
 
 - Ruby on Rails 7
 - SQLite3（開発用）
@@ -15,12 +15,12 @@
 - Vanilla CSS
 - Devise（ログイン機能）
 
-## ✅ スタッフ＆管理者 共通機能
+### ✅ スタッフ＆管理者 共通機能
 
 - Devise によるユーザ認証（スタッフ／管理者をロール分離）
 - Ajax・モーダルを活用したスムーズな UI
 
-## 📱 スタッフ画面 / Shift Scheduler（スマホ）
+### 📱 スタッフ画面 / Shift Scheduler（スマホ）
 
 - **カレンダー**
   - スタッフの募集状況や案件詳細を確認
@@ -41,4 +41,4 @@
 
 ## 🔗 公開 Figma
 
-    [Figmaで画面フローを確認する](https://www.figma.com/design/Z5j3tj0rVgr7mtY5ijVlan/%E3%82%B7%E3%83%95%E3%83%88%E7%AE%A1%E7%90%86?node-id=0-1&t=dFYZruKgUkmZ0NB4-1)
+    [Figmaで画面フローを確認する](<https://www.figma.com/design/Z5j3tj0rVgr7mtY5ijVlan/%E3%82%B7%E3%83%95%E3%83%88%E7%AE%A1%E7%90%86?node-id=0-1&t=dFYZruKgUkmZ0NB4-1>)
