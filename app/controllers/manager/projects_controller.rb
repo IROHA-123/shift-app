@@ -1,7 +1,5 @@
-# 管理者 admin が、案件 projects を登録する場所 --------------------------------------------
-
-class Admin::ProjectsController < ApplicationController
-  layout "admin"
+class Manager::ProjectsController < ApplicationController
+  layout "manager"
   before_action :authenticate_user!
   before_action :check_admin
 
@@ -16,7 +14,7 @@ class Admin::ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      redirect_to admin_projects_path, notice: "案件を登録しました"
+      redirect_to manager_projects_path, notice: "案件を登録しました"
     else
       render :new
     end

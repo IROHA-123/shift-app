@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_07_122305) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_14_005604) do
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.date "work_date"
@@ -51,6 +51,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_07_122305) do
     t.datetime "updated_at", null: false
     t.string "role"
     t.string "name"
+    t.string "employee_id"
+    t.date "joined_on"
+    t.string "work_style"
+    t.string "skill_level"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

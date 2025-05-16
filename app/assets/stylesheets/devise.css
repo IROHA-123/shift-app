@@ -1,0 +1,116 @@
+.form-container {
+  margin: 70px auto;
+  padding: 50px;
+  width: 320px;
+  box-shadow: #dcdcdc 0 0 10px;
+  border-radius: 10px;
+  user-select: none;
+  color: #645e64;
+  font-weight: 600;
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.form-box {
+  display: block;
+  margin: 20px auto;
+}
+.form-label {
+  display: inline-block;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.form-field {
+  padding: 5px;
+  width: 100%;
+  height: 30px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
+  background-color: var(--primary1-color);
+}
+.form-field:focus {
+  border-radius: 3px;
+  outline: solid 1px#2a90ac;
+  box-shadow: 0px 0px 5px 0px #81d2de ;
+}
+.form-textarea {
+  height: 60px;
+}
+/* input::placeholder{
+  font-size: 14px;
+  color:#d1d8d9;
+} */
+.submit {
+  cursor: pointer;
+  margin:50px auto 0;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--primary5-color);
+  
+  text-align: center;
+  line-height: 30px;
+  color: #ffffff;
+}
+.submit:hover {
+  background-color: var(--primary6-color);
+  transition: .3s;
+}
+/* -------------------------checkbox-------------------------- */
+.checkbox-container {
+  display: flex;
+  padding: 12px 0px;
+  align-items: center;
+  cursor: pointer;
+}
+.checkbox-container:hover > .DummyCheck {
+  transform: scale(1.1);
+}
+.checkbox:checked + .DummyCheck {
+  background-color: #2a90ac;
+}
+.checkbox:checked + .DummyCheck::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 35%;
+  height: 4px;
+  border-radius: 2px;
+  transform: translate(-6px, 5px) rotateZ(-135deg);
+  transform-origin: 2px 2px;
+  background: #FFFFFF;
+}
+.checkbox:checked + .DummyCheck::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 4px;
+  border-radius: 2px;
+  transform: translate(-6px, 5px) rotateZ(-45deg);
+  transform-origin: 2px 2px;
+  background: #FFFFFF;
+}
+.DummyCheck {
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, .15);
+  border: solid 2px transparent;
+  border-radius: 50%;
+  transition: all .15s linear;
+}
+.CheckLabel {
+  margin-left: 10px;
+  line-height: 20px;
+  font-size: 13px;
+}

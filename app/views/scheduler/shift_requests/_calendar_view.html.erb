@@ -1,7 +1,10 @@
-  <!--今月------------------------------------------------------------->
+<% @month_calendars.each do |month_hash| %>
+  <% base_date = month_hash[:base_date] %>
+  <% days      = month_hash[:days]      %>
+
   <table class="calendar">
     <caption class="calendar-caption">
-      <%= Date.today.strftime("%Y年%-m月") %>
+      <%= base_date.strftime("%Y年%-m月") %>
     </caption>
     <thead>
       <tr>
@@ -11,24 +14,29 @@
       </tr>
     </thead>
     <tbody>
-      <% @this_month_days.in_groups_of(7, '') do |week| %>
+      <% days.in_groups_of(7, '') do |week| %>
         <tr>
           <% week.each do |day| %>
             <% if day.present? %>
               <% projects = @projects_by_date[day] || [] %>
-              <% total_remaining = projects.sum { |p| p.required_number - p.shift_assignments.count } %>
               <td>
                 <div
                   class="day-box"
                   data-action="click->modal#open"
-                  <%# data-controller="modal" %>
                   data-date="<%= day %>"
-                  data-project-ids="<%= projects.map(&:id).join(',') %>">
-
-                  <p class="<%= 'today' if day == Date.today %>"><%= day.day %></p>
+                  <% if projects.any? %>
+                    data-project-ids="<%= projects.map(&:id).join(',') %>"
+                  <% end %>>
+                  
+                  <p class="
+                    <%= 'today'       if day == Date.today %>
+                    <%= 'not-current' if day.month != base_date.month %>
+                  ">
+                    <%= day.day %>
+                  </p>
 
                   <% if projects.any? %>
-                    <p class="more-needed">あと<%= total_remaining %>人</p>
+                    <div class="more-needed"></div>
                   <% end %>
                 </div>
               </td>
@@ -38,92 +46,6 @@
           <% end %>
         </tr>
       <% end %>
-
     </tbody>
   </table>
-
-  <!--来月------------------------------------------------------------->
-  <table class="calendar">
-    <caption class="calendar-caption"><%= (Date.today + 1.month).strftime("%Y年%-m月") %> </caption>
-    <thead>
-      <tr>
-        <% %w(月 火 水 木 金 土 日).each do |wday| %>
-          <th class="weekday"><%= wday %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @next_month_days.in_groups_of(7, '') do |week| %>
-        <tr>
-          <% week.each do |day| %>
-            <% if day.present? %>
-              <% projects = @projects_by_date[day] || [] %>
-              <% total_remaining = projects.sum { |p| p.required_number - p.shift_assignments.count } %>
-              <td>
-                <div
-                  class="day-box"
-                  data-action="click->modal#open"
-                  <%# data-controller="modal" %>
-                  data-date="<%= day %>"
-                  data-project-ids="<%= projects.map(&:id).join(',') %>">
-
-                  <p class="<%= 'today' if day == Date.today %>"><%= day.day %></p>
-
-                  <% if projects.any? %>
-                    <p class="more-needed">あと<%= total_remaining %>人</p>
-                  <% end %>
-                </div>
-              </td>
-            <% else %>
-              <td class="empty"></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-
-    </tbody>
-  </table>
-
-  <!--再来月------------------------------------------------------------->
-  <table class="calendar">
-    <caption class="calendar-caption"><%= (Date.today + 2.month).strftime("%Y年%-m月") %> </caption>
-    <thead>
-      <tr>
-        <% %w(月 火 水 木 金 土 日).each do |wday| %>
-          <th class="weekday"><%= wday %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @next2_month_days.in_groups_of(7, '') do |week| %>
-        <tr>
-          <% week.each do |day| %>
-            <% if day.present? %>
-              <% projects = @projects_by_date[day] || [] %>
-              <% total_remaining = projects.sum { |p| p.required_number - p.shift_assignments.count } %>
-              <td>
-                <div
-                  class="day-box"
-                  data-action="click->modal#open"
-                  <%# data-controller="modal" %>
-                  data-date="<%= day %>"
-                  data-project-ids="<%= projects.map(&:id).join(',') %>">
-
-                  <p class="<%= 'today' if day == Date.today %>"><%= day.day %></p>
-
-                  <% if projects.any? %>
-                    <p class="more-needed">あと<%= total_remaining %>人</p>
-                  <% end %>
-                </div>
-              </td>
-            <% else %>
-              <td class="empty"></td>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-
-    </tbody>
-  </table>
-
-
+<% end %>

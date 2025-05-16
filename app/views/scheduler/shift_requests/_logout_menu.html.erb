@@ -1,0 +1,30 @@
+<div
+  id="user-menu"
+  class="bottom-sheet menu_hidden"
+  data-logout-menu-target="panel"
+>
+  <!-- 背景クリックで閉じる -->
+  <div class="sheet-backdrop" data-action="click->logout-menu#close"></div>
+
+  <!-- シート本体 -->
+  <div class="sheet-content">
+    <div class="sheet-handle"></div>
+
+    <div class="sheet-user-info">
+      <p class="user-name"><%= current_user.name %> さん</p>
+      <p class="user-id">従業員ID：<%= current_user.id %></p>
+      <p class="user-email"><%= current_user.email %></p>
+    </div>
+
+    <%= button_to destroy_user_session_path,
+              method: :delete,
+              data: { turbo: false },
+              class: "sheet-logout-btn" do %>
+      <%= image_tag "menu__close_2.svg", alt: "×", class: "icon_close" %>
+      ログアウト
+    <% end %>
+
+
+  </div>
+
+</div>

@@ -6,23 +6,24 @@
     <%= image_tag "menu__close", alt: "close", class: "btn-modal-close" %>
   </button>
 
-  <!-- 日付 -->
   <div class="modal-date">
     <%= japanese_date_with_weekday(project.work_date) %>
   </div>
-  <!-- 時間帯 -->
   <div class="modal-time">
     <%= project.start_time.strftime("%H:%M") %>〜<%= project.end_time.strftime("%H:%M") %>
   </div>
-  <!-- 場所 -->
   <div class="modal-location">
     <%= project.location %>
   </div>
-  <!-- 残り人数 -->
-  <% remaining = project.required_number - project.shift_assignments.count %>
   <div class="modal-remaining">
-    <span class="bubble">あと<%= remaining %>人<br>手伝ってください！🙏</span>
+    <% remaining = project.required_number - project.shift_assignments.count %>
+    <span class="bubble">
+      あと<strong class="remaining-count"><%= remaining %></strong>人<br>
+      手伝ってください！🙏
+    </span>
   </div>
+
+  
   <!-- OK／NG ボタン -->
   <div class="form-shift">
     <%= form_with url: scheduler_shift_requests_path, method: :post, local: true do |f| %>
@@ -38,4 +39,5 @@
       </div>
     <% end %>
   </div>
+
 <% end %>

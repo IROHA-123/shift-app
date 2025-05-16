@@ -1,4 +1,4 @@
-<!--すべてに共通するhtml-->
+<!--managerとschedulerすべてに共通-->
 
 <!DOCTYPE html>
 <html>
@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%# Google Fonts ----------------------%>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <%# css -------------------------------%>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <!-- css -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%# javaScript ------------------------%>
+    <!-- javaScript -->
     <%= javascript_importmap_tags %>
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -22,16 +22,33 @@
 
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <!--トースト通知-->
+    <% if flash[:notice] || flash[:alert] %>
+      <div
+        class="toast"
+        data-controller="toast"
+      >
+        <% if flash[:notice] %>
+          <div class="toast__icon">
+            <%= image_tag "icon__check.svg", alt: "成功", class: "toast__icon" %>
+          </div>
+          <p><%= flash[:notice] %></p>
+        <% else %>
+          <p><%= flash[:alert] %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+
+
     <%= yield %>
 
-    <%# javaScript ------------------------%>
-    <%= javascript_include_tag "application", type: "module" %>
+
+    <!-- javaScript -->
+    <!--<%= javascript_include_tag "application", type: "module" %>-->
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
       document.addEventListener("turbo:load", function () {
         const swiper = new Swiper(".swiper-main", {
@@ -40,9 +57,7 @@
             el: ".swiper-pagination",
             clickable: true,
           },
-          // スワイプでタブ間を自由に行き来できるように
           allowTouchMove: true,
-          // ナビゲーションと連動したい場合
           on: {
             slideChange: function () {
               const navItems = document.querySelectorAll(".tab-nav .nav-item")
@@ -51,7 +66,6 @@
             }
           }
         })
-
         // ナビゲーションタップでも切り替える
         document.querySelectorAll(".tab-nav .nav-item").forEach((tab, index) => {
           tab.addEventListener("click", () => {

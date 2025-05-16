@@ -33,3 +33,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Mac固有の不要ファイル
+.DS_Store
+
+# Vimなどのスワップファイル
+*.swp

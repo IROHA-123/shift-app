@@ -1,0 +1,33 @@
+<!-- ログインページ -->
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),data: { turbo:false }) do |f| %>
+  <div class="form-container">
+    <h2>ログイン</h2>
+      <div class="form-box">
+        <%= f.label :メールアドレス , class: "form-label" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class:"form-field" %>
+      </div>
+
+      <div class="form-box">
+        <%= f.label :パスワード , class: "form-label" %><br />
+        <%= f.password_field :password, autocomplete: "current-password",class:"form-field" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="checkbox-container">
+          <%= f.check_box :remember_me, id: "remember_me", class: "checkbox" %>
+          <span class="DummyCheck"></span>
+          <%= f.label :remember_me, "Remember me", for: "remember_me", class: "CheckLabel" %>
+        </div>
+      <% end %>
+
+      <div class="form-box">
+        <%= f.submit "ログイン", class:"submit" %>
+      </div>
+
+      <%= render "devise/shared/links" %>
+  </div>
+<% end %>
+
+
+

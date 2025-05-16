@@ -3,9 +3,14 @@
 
 @import "destyle.css";
 @import "main.css";
-@import "admin.css";
+
+@import "devise.css";
+
+@import "manager.css";
+@import "manager_users.css";
+
 @import "scheduler.css";
-@import "my_shifts.css";
+@import "scheduler_my_shifts.css";
 
 /* -------------------------------------------- */
 /*

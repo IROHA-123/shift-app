@@ -4,7 +4,7 @@
   display: flex;
 }
 
-/* -------------------- header -------------------- */
+/* header -------------------- */
 
 .admin-container header {
   padding: 20px;
@@ -38,7 +38,9 @@
   left: 40px;
 }
 
-/* --------------- main-container ----------------- */
+/*main-container ----------------- */
+
 .admin-container .main-container {
-  margin:30px;
+  padding:50px 80px;
+  user-select: none;
 }

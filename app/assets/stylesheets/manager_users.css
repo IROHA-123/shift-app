@@ -1,0 +1,126 @@
+.user-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.user-search {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.user-table th {
+  background-color: #f4f6f8;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.skill-label {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.skill-0 { background-color: #FFF; }
+.skill-1 { background-color: var(--primary1-color); }
+.skill-2 { background-color: var(--primary2-color); }
+.skill-3 { background-color: var(--primary3-color); }
+
+.user-options {
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+/* 新規ユーザー追加ボタン -------------------------------------------- */
+
+.tooltip-container {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 100;
+}
+
+.floating-button {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary6-color);
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  line-height: 50px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.floating-button:hover {
+  background-color: #1976d2;
+  transform: scale(1.1);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  background-color: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+}
+
+select.skill-level-select {
+  padding: 6px 10px;
+  min-width: 80px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}

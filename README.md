@@ -1,24 +1,31 @@
-# README
+# Shift Manager & Scheduler
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+シフト管理を効率化する Web アプリ（Rails 製）
 
-Things you may want to cover:
+## 🔧 使用技術
 
-* Ruby version
+- Ruby on Rails 7
+- SQLite3（開発用）
+- Stimulus.js
+- Vanilla CSS
+- Devise（ログイン機能）
 
-* System dependencies
+## 📌 管理者画面の機能（Shift Manager）
 
-* Configuration
+- ユーザ一覧表示・登録
+- プロジェクト一覧表示・登録
+- 習熟度プルダウン編集（select タグ + 自動更新対応）
 
-* Database creation
+## 📌 スタッフ画面の機能（Shift Scheduler）
 
-* Database initialization
+- シフト希望登録（Ajax 対応）
+- モーダル UI 表示
+- 勤務一覧表示
 
-* How to run the test suite
+## 🚀 起動方法
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+bundle install
+bin/rails db:setup
+bin/dev
+```

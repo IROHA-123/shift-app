@@ -1,38 +1,49 @@
 <div class="my-shift-wrapper">
 
-  <h2>マイシフト　<%= current_user.name %>さん</h2>
+  <button
+    type="button"
+    class="user-name-button"
+    data-action="click->logout-menu#open">
+    <%= current_user.name %>
+  </button>
+  さん
 
   <h3>勤務予定日です。</h3>
-  <% if @shift_assignments.any? %>
-    <% @shift_assignments.each do |sa| %>
-      <div class="shift-card">
-        <p>
+  <div class="shift-card">
+    <% if @shift_assignments_list.any? %>
+      <% @shift_assignments_list.each do |sa| %>
+        <p class="shift-project">
           <%= japanese_date_with_weekday(sa.project.work_date) %>
-          <%= "#{sa.project.start_time.strftime('%H:%M')}〜#{sa.project.end_time.strftime('%H:%M')}" %>
+          <%= "#{sa.project.start_time.strftime('%H:%M')}〜#{sa.project.end_time.strftime('%H:%M')}" %><br>
           <%= sa.project.location %>
           <%= sa.project.title %>
+          <span class="line"></span>
         </p>
-      </div>
+      <% end %>
+    <% else %>
+      <p>勤務予定日はありません</p>
     <% end %>
-  <% else %>
-    <p>勤務予定はありません。</p>
-  <% end %>
+  </div>
 
-  <h3>シフト提出日です。（未確定）</h3>
-    <%= debug @shift_requests %>
-  <% if @shift_requests.any? %>
-    <% @shift_requests.each do |sr| %>
-      <div class="shift-card">
-        <p>
+  <h3>シフト希望提出日です。</h3>
+  <div class="shift-card">
+    <% if @shift_requests_list.any? %>
+      <% @shift_requests_list.each do |sr| %>
+        <p class="shift-project">
           <%= japanese_date_with_weekday(sr.project.work_date) %>
-          <%= "#{sr.project.start_time.strftime('%H:%M')}〜#{sr.project.end_time.strftime('%H:%M')}" %>
+          <%= "#{sr.project.start_time.strftime('%H:%M')}〜#{sr.project.end_time.strftime('%H:%M')}" %><br>
           <%= sr.project.location %>
           <%= sr.project.title %>
         </p>
-      </div>
+      <% end %>
+    <% else %>
+      <p>希望提出日はありません</p>
     <% end %>
-  <% else %>
-    <p>提出済みのシフトはありません。</p>
-  <% end %>
+    <p class="shift-note">
+      こちらのシフトは未確定です。<br>
+      管理者からの承認をすこしお待ちください。
+    </p>
+  </div>
+
 
 </div>

@@ -12,20 +12,20 @@
       </div>
     </header>
 
-    <!--コントローラーの制御範囲を定義（カレンダー全体）-->
-    <div data-controller="modal">
+    <!--コントローラーの制御範囲-->
+    <div data-controller="modal logout-menu">
 
       <!--Swiper --------------------------------------------->
       <div class="swiper swiper-main">
         <div class="swiper-wrapper">
           
-            <!--カレンダー画面 ---------------------------------->
+            <!--カレンダー画面 --------------------------------->
             <div class="swiper-slide">
               <%= render partial: "calendar_view",
                           locals: { calendar_days: @calendar_days,projects_by_date: @projects_by_date } %>
             </div>
           
-            <!--マイシフト画面 ---------------------------------->
+            <!--マイシフト画面 --------------------------------->
             <div class="swiper-slide">
               <%= render partial: "my_shifts",
                           locals: { shift_assignments: @shift_assignments,shift_requests: @shift_requests } %>
@@ -33,14 +33,12 @@
 
         </div>
       </div>
-      <!--Swiper --------------------------------------------->
+      <!--Swiperここまで -------------------------------------->
 
-      <!-- モーダル -->
-      <%= render partial:"modal_projects"  %>
-
+      <%= render partial:"modal_projects" %>
+      <%= render partial:"logout_menu" %>
 
     </div>
-
 
   </div>
 </div>

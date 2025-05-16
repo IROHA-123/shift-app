@@ -7,15 +7,16 @@
   width: 380px;
   background-color: #FFF;
 }
-/* header------------------------------------------------------ */
+/* header---------------------------------------- */
 
 /* 全体ヘッダーエリア */
 .header-wrapper {
   width: 380px;
   position: fixed;
-  background-color: #ffffffe7;
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 10;
   text-align: center;
+  backdrop-filter: blur(10px);
 }
 /* ヘッダー部分（スクロールで消えたかった） */
 .scheduler-header {
@@ -78,14 +79,14 @@
   width: 45px;
   height: 45px;
   border: solid 1px var(--secondary2--color);
-  text-align: center;
   cursor: pointer;
   position: relative;
+  text-align: center;
 }
 .day-box p {
   margin-bottom: 3px;
   height: 20px;line-height: 20px;
-  font-size: 14px;
+  font-size: 12px;
 }
 p.today {
   margin: 0 auto;
@@ -96,66 +97,30 @@ p.today {
   font-weight: 700;
 }
 
-p.more-needed {
-  height: 20px;line-height: 20px;
-  border-radius: 10px;
-  background-color:var(--accent-red7-color);
-  color: #FFF;
-  font-size: 9px;
-  font-weight: 700;
+.not-current {
+  color: #ccc;
+  opacity: 0.6;
+}
+
+.more-needed {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color:var(--accent-red5-color);
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -70%);
 }
 
 /* ---------------------------------------------------------
 　モーダル　　_modal_projects.html.erb
 ----------------------------------------------------------- */
 
-
 /* モーダルが open のときだけ Swiper の transform を打ち消す */
 body:has(.modal.open) .swiper-wrapper,
 body:has(.modal.open) .swiper-slide {
   transform: none !important;
-}
-
-/* モーダル共通 */
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.1);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease-out, visibility 0s linear 0.2s;
-  transform: none !important;
-  will-change: auto !important;
-}
-.modal.open {
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0s;
-}
-
-.modal-content {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  width: 90%; max-width: 360px;
-  height: 600px;
-  padding: 60px 40px 30px;
-  box-shadow: 0 0 10px 2px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  background-color: #fff;
-  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
-  transform: translate(-50%, -50%) translateY(20px) !important;
-  opacity: 0;
-  z-index: 1001 !important;
-  margin: 0 !important;
-}
-/* open 時：元位置に＆不透明 */
-.modal.open .modal-content {
-  transform: translate(-50%, -50%) translateY(0) !important;
-  opacity: 1;
 }
 
 .modal-date, .modal-time {
@@ -166,7 +131,7 @@ body:has(.modal.open) .swiper-slide {
   font-size: 20px;
 }
 
-/* バブル */
+/* 手伝ってください！ */
 .bubble {
   display: inline-block;
   background: var(--secondary1--color);
@@ -178,16 +143,21 @@ body:has(.modal.open) .swiper-slide {
   text-align: center;
 }
 
+.remaining-count {
+  padding: 0 3px;
+  color: var(--primary5-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+/* シフト希望を提出する */
 .form-shift {
   padding: 30px 20px 25px;
   border-radius: 10px;
   box-shadow: 0 0 8px 3px rgba(0,0,0,0.1);
   text-align: center;
-
 }
-
-/* シフト希望を提出する */
-
 .actions-title {
   margin-bottom: 20px;
   font-size: 14px;
@@ -212,26 +182,4 @@ body:has(.modal.open) .swiper-slide {
   box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
   color: #FFF;
   line-height: 50px;
-}
-
-/* 閉じるボタン */
-.modal-close {
-  display: block;
-  position: absolute;
-  top: 40px; right: 40px;
-}
-.modal-close img {
-  width: 15px;
-}
-
-/* --------------------------------------------------------------
-　my_shift
----------------------------------------------------------------- */
-.shift-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  background: white;
 }

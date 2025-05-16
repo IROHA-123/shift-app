@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   # Deviseログイン
-  devise_for :users
+  devise_for :users, skip: [:registrations]  # 新規登録を無効化
+  
 
   # 認証済みユーザーの root
   authenticated :user do
@@ -9,29 +10,28 @@ Rails.application.routes.draw do
   end
 
   # 未認証ユーザーの root
-  unauthenticated do
-    root to: "devise/sessions#new", as: :unauthenticated_root
+  devise_scope :user do
+    unauthenticated do
+      root to: "devise/sessions#new", as: :unauthenticated_root
+    end
   end
 
   # ------------------------------------------------------------------
-  # 管理者画面
-  namespace :admin do
-    resources :users, only: [:index, :new, :create]
-    resources :projects, only: [:index, :new, :create]
-  end
 
-  # 従業員画面
+  # スタッフ画面（Shift Scheduler）
   namespace :scheduler do
     resources :shift_requests, only: [:index, :create] do
       collection do
         get :modal        # Ajax用のモーダル取得
-        get :my_shifts    # 自分のシフト一覧
+        get :my_shifts
       end
     end
   end 
 
-  # シフト調整画面（Shift Manager）
+  # 管理者画面（Shift Manager）
   namespace :manager do
-    resources :shifts, only: [:index, :update]
-  end
+      resources :users, only: [:index, :new, :create, :update]
+      resources :projects, only: [:index, :new, :create, :update]
+      resources :shifts, only: [:index, :update]
+    end
 end
