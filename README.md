@@ -3,8 +3,8 @@
 大学時代のアルバイト経験をもとに、レストラン業務の課題をモデル化して開発した Web アプリです。
 スタッフ用・管理者用の２種類の UI を備え、実務に即した構成を意識して設計しました。
 
-**🗓️ 作成時期　：　 2025 年 4 月～ 5 月**
-**🕒 所要時間　：　約３週間**
+**🗓️ 作成時期　：　 2025 年 4 月～ 5 月**<br>
+**🕒 所要時間　：　約３週間**<br>
 👤 **協力者　　：　 Copilot, ChatGPT**
 
 ## ⚙️ 使用技術
@@ -39,6 +39,6 @@
 - **ユーザー管理**
   - ユーザー一覧の確認・編集・新規登録
 
-## 🔗 Figma（画面フロー）
+## 🔗 公開 Figma
 
-    https://www.figma.com/design/Z5j3tj0rVgr7mtY5ijVlan/%E3%82%B7%E3%83%95%E3%83%88%E7%AE%A1%E7%90%86?node-id=0-1&t=dFYZruKgUkmZ0NB4-1
+    [Figmaで画面フローを確認する](https://www.figma.com/design/Z5j3tj0rVgr7mtY5ijVlan/%E3%82%B7%E3%83%95%E3%83%88%E7%AE%A1%E7%90%86?node-id=0-1&t=dFYZruKgUkmZ0NB4-1)
