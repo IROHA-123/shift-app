@@ -1,24 +1,33 @@
 <!--managerとschedulerすべてに共通-->
 
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>ShiftApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <!-- css -->
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <!-- javaScript -->
-    <%= javascript_importmap_tags %>
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  </head>
+<head>
+  <title>ShiftApp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- 共通CSS -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <!-- 名前空間ごとのCSS（manager / scheduler） -->
+  <% if controller.controller_path.start_with?("manager") %>
+    <%= stylesheet_link_tag "manager/base", "data-turbo-track": "reload" %>
+  <% elsif controller.controller_path.start_with?("scheduler") %>
+    <%= stylesheet_link_tag "scheduler/base", "data-turbo-track": "reload" %>
+  <% end %>
+
+  <!-- JavaScript -->
+  <%= javascript_importmap_tags %>
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
 
 
   <body>

@@ -1,16 +1,9 @@
-/* application.cssは、importのみ記述 */
+/* 名前空間ごとのCSSはレイアウト側で分けて読み込む */
 /* -------------------------------------------- */
 
-@import "destyle.css";
-@import "main.css";
-
-@import "devise.css";
-
-@import "manager.css";
-@import "manager_users.css";
-
-@import "scheduler.css";
-@import "scheduler_my_shifts.css";
+@import "base/destyle.css";
+@import "base/devise.css";
+@import "base/main.css";
 
 /* -------------------------------------------- */
 /*
