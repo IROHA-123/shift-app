@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # Deviseログイン
   devise_for :users, skip: [:registrations]  # 新規登録を無効化
   
-
   # 認証済みユーザーの root
   authenticated :user do
     root to: "scheduler/shift_requests#index", as: :authenticated_root
@@ -30,8 +29,10 @@ Rails.application.routes.draw do
 
   # 管理者画面（Shift Manager）
   namespace :manager do
-      resources :users, only: [:index, :new, :create, :update]
+    get 'assignments/index'
+      resources :assignments, only: [:index]
+      resources :confirmed, only: [:index, :update]
       resources :projects, only: [:index, :new, :create, :update]
-      resources :shifts, only: [:index, :update]
+      resources :users, only: [:index, :new, :create, :update]
     end
 end
