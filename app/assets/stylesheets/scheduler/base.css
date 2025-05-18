@@ -1,2 +1,4 @@
-@import "scheduler/style.css";
-@import "scheduler/my_shift.css";
+/*
+ *= require scheduler/style
+ *= require scheduler/my_shifts
+ */

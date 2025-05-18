@@ -31,58 +31,11 @@
 
 
   <body>
-    <!--トースト通知-->
-    <% if flash[:notice] || flash[:alert] %>
-      <div
-        class="toast"
-        data-controller="toast"
-      >
-        <% if flash[:notice] %>
-          <div class="toast__icon">
-            <%= image_tag "icon__check.svg", alt: "成功", class: "toast__icon" %>
-          </div>
-          <p><%= flash[:notice] %></p>
-        <% else %>
-          <p><%= flash[:alert] %></p>
-        <% end %>
-      </div>
-    <% end %>
 
-
-
-    <%= yield %>
-
+  <%= yield %>
 
     <!-- javaScript -->
     <!--<%= javascript_include_tag "application", type: "module" %>-->
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-      document.addEventListener("turbo:load", function () {
-        const swiper = new Swiper(".swiper-main", {
-          loop: false,
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-          },
-          allowTouchMove: true,
-          on: {
-            slideChange: function () {
-              const navItems = document.querySelectorAll(".tab-nav .nav-item")
-              navItems.forEach(item => item.classList.remove("active"))
-              navItems[this.activeIndex].classList.add("active")
-            }
-          }
-        })
-        // ナビゲーションタップでも切り替える
-        document.querySelectorAll(".tab-nav .nav-item").forEach((tab, index) => {
-          tab.addEventListener("click", () => {
-            swiper.slideTo(index)
-          })
-        })
-      })
-    </script>
 
   </body>
 </html>

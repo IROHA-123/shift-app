@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShiftApp スケジューラー</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- 共通CSS -->
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!-- scheduler 用CSS -->
+    <%= stylesheet_link_tag "scheduler/base", "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!--トースト通知-->
+    <% if flash[:notice] || flash[:alert] %>
+      <div
+        class="toast"
+        data-controller="toast"
+      >
+        <% if flash[:notice] %>
+          <div class="toast__icon">
+            <%= image_tag "icon__check.svg", alt: "成功", class: "toast__icon" %>
+          </div>
+          <p><%= flash[:notice] %></p>
+        <% else %>
+          <p><%= flash[:alert] %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener("turbo:load", function () {
+        const swiper = new Swiper(".swiper-main", {
+          loop: false,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          allowTouchMove: true,
+          on: {
+            slideChange: function () {
+              const navItems = document.querySelectorAll(".tab-nav .nav-item")
+              navItems.forEach(item => item.classList.remove("active"))
+              navItems[this.activeIndex].classList.add("active")
+            }
+          }
+        })
+        // ナビゲーションタップでも切り替える
+        document.querySelectorAll(".tab-nav .nav-item").forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            swiper.slideTo(index)
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

@@ -1,4 +1,3 @@
-<!-- managerの共通サイドメニュー（ヘッダー） -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,57 +5,58 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- 共通CSS -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <!-- Manager 用CSS -->
+    <%= stylesheet_link_tag "manager/base", "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <div class="admin-container">
-      <header>
-        <nav>
-          <% if user_signed_in? %>
-          <%# <h1>Shift Manager（管理画面）</h1> %>
-          <div class="link-mypage">
-            <%# <%= link_to destroy_user_session_path, method: :delete do %> 
-              <%= image_tag "icon__mypage.svg", alt:"マイページ" %>
-            <%# <% end %> 
+    <div class="manager-layout">
+      <!-- Side menu -->
+      <aside class="sidebar">
+        <div class="user-info">
+          <div class="user-info-chip">
+            <%= image_tag "icon__mypage.svg", class: "user-icon", alt: "ユーザーアイコン" %>
+            <div class="user-name"><%= current_user.name %>さん</div>
           </div>
-          <div class="admin-links link-shift">
-            <%# <%= link_to destroy_user_session_path, method: :delete do %>
-              <%= image_tag "icon__shift.svg", alt:"シフト予定" %>
-              <span>シフト<br>予定</span>
-            <%# <% end %>
-          </div>
-          <div class="admin-links link-addProject">
-            <%# <%= link_to destroy_user_session_path, method: :delete do %>
-              <%= image_tag "icon__plus.svg", alt:"案件登録" %>
-              <span>案件登録</span>
-            <%# <% end %> 
-          </div>
-          <div class="admin-links link-users">
-            <%# <%= link_to destroy_user_session_path, method: :delete do %>
-              <%= image_tag "icon__user.svg", alt:"ユーザー管理" %>
-              <span>ユーザー<br>管理</span>
-            <%# <% end %> 
-          </div>
-          <% end %>
-          <div class="link-logout">
-            <%= button_to destroy_user_session_path,
-                    method: :delete,
-                    data: { turbo: false } do %>
-              <%= image_tag "icon__logout.svg", alt:"ログアウト" %>
-            <% end %>
-          </div>
-        </nav>
-      </header>
-      <!-- main -->
-      <main>
-        <div class="main-container">
-          <%= yield %>
         </div>
+
+        <nav class="menu">
+          <%= link_to manager_assignments_path, class: "menu-item #{'active' if current_page?(manager_assignments_path)}" do %>
+            <%= image_tag "icon__shift.svg", class: "menu-icon shift-icon", alt: "割り当て状況" %>
+            <span>割り当て状況</span>
+          <% end %>
+
+          <%= link_to manager_confirmed_index_path, class: "menu-item #{'active' if current_page?(manager_confirmed_index_path)}" do %>
+            <%= image_tag "icon__shift_checked.svg", class: "menu-icon shift-icon", alt: "確定シフト" %>
+            <span>確定シフト</span>
+          <% end %>
+
+          <%= link_to new_manager_project_path, class: "menu-item #{'active' if current_page?(new_manager_project_path)}" do %>
+            <%= image_tag "icon__plus.svg", class: "menu-icon", alt: "案件登録" %>
+            <span>案件登録</span>
+          <% end %>
+
+          <%= link_to manager_users_path, class: "menu-item #{'active' if current_page?(manager_users_path)}" do %>
+            <%= image_tag "icon__user.svg", class: "menu-icon", alt: "ユーザー管理" %>
+            <span>ユーザー管理</span>
+          <% end %>
+        </nav>
+
+        <div class="logout-tooltip-container">
+          <%= button_to destroy_user_session_path, method: :delete, class: "logout-button" do %>
+            <%= image_tag "icon__logout.svg", class:"menu-icon", alt: "ログアウト" %>
+          <% end %>
+          <span class="logout-tooltip-text">ログアウト</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <%= yield %>
       </main>
-    
     </div>
   </body>
-
 </html>

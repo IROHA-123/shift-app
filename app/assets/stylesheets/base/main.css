@@ -1,4 +1,6 @@
 :root {
+  --main--bg:#FBFBFC;
+  --chip--bg:#0E0E0F;
   --primary1-color:#EDF7FB;
   --primary2-color:#D0ECF9;
   --primary3-color:#B4E0F2;
@@ -6,7 +8,7 @@
   --primary5-color:#3AB0E3;
   --primary6-color:#2993C1;
   --primary7-color:#0A719D;
-  --secondary1--color:#F5F4F5;
+  --secondary1--color:#F4F4F5;
   --secondary2--color:#E0DFE0;
   --secondary3--color:#DAD7DA;
   --secondary4--color:#BEBBBE;
@@ -22,6 +24,7 @@
 body {
   font-family: "Noto Sans JP", sans-serif;
   color: var(--secondary9--color);
+  user-select: none;
 }
 
 select {

@@ -1,5 +1,6 @@
 # app/controllers/scheduler/shift_requests_controller.rb
 class Scheduler::ShiftRequestsController < ApplicationController
+  layout 'scheduler'
   before_action :authenticate_user!
 
   def index
