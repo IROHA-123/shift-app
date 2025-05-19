@@ -5,10 +5,10 @@
     <tr>
       <th>日付</th>
       <th>時間</th>
-      <th>会場</th>
-      <th>必要人数</th>
-      <th>確定人数</th>
-      <th>残人数</th>
+      <th class="col-location">会場</th>
+      <th class="col-number">必要人数</th>
+      <th class="col-number">確定人数</th>
+      <th class="col-number">残人数</th>
       <th>ステータス</th>
     </tr>
   </thead>
@@ -17,22 +17,34 @@
       <% confirmed = project.shift_assignments.count %>
       <% remaining = project.required_number - confirmed %>
       <tr>
-        <td><%= project.work_date.strftime("%-m/%d（%a）") %></td>
+        <td><%= japanese_short_date_with_weekday(project.work_date) %></td>
         <td><%= "#{project.start_time.strftime('%H:%M')}〜#{project.end_time.strftime('%H:%M')}" %></td>
-        <td><%= project.location %></td>
-        <td><%= project.required_number %></td>
-        <td><%= confirmed %></td>
-        <td><%= remaining > 0 ? remaining : "-" %></td>
+        <td class="col-location"><%= project.location %></td>
+        <td class="col-number"><%= project.required_number %></td>
+        <td class="col-number"><%= confirmed %></td>
+        <td class="col-number"><%= remaining > 0 ? remaining : "-" %></td>
         <!--ステータス-->
         <td>
           <% if remaining <= 0 %>
-            <span class="status done">✔ 済</span>
+            <%= link_to assignment_manager_project_path(project), class: "status done" do %>
+              <%= image_tag "icon__check.svg", class: "status-icon", alt: "済" %>
+              <div class="status-text">済</div>
+            <% end %>
           <% elsif confirmed == 0 %>
-            <span class="status danger">❗ 要割当</span>
+            <%= link_to assignment_manager_project_path(project), class: "status danger" do %>
+              <%= image_tag "icon__warning2.svg", class: "status-icon", alt: "要割当" %>
+              <div class="status-text">要割当</div>
+            <% end %>
           <% else %>
-            <span class="status warn">⚠ あと<%= remaining %>人</span>
+            <%= link_to assignment_manager_project_path(project), class: "status warn" do %>
+              <%= image_tag "icon__warning.svg", class: "status-icon", alt: "注意" %>
+              <div class="status-text">あと<%= remaining %>人</div>
+            <% end %>
           <% end %>
         </td>
+
+
+
         <!--ステータスここまで-->
       </tr>
     <% end %>

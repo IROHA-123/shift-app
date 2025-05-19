@@ -1,0 +1,59 @@
+<%# app/views/manager/projects/assignment.html.erb %>
+<%# レイアウト“manager”を使っている前提です %>
+
+<div class="assignment-drawer">
+  <!-- 閉じるボタン -->
+  <%= link_to manager_projects_path, class: "drawer-close" do %>
+    <%= image_tag "menu__close.svg", alt: "閉じる" %>
+  <% end %>
+
+  <!-- ヘッダー -->
+  <div class="assignment-header">
+    <h2 class="assignment-date">
+      <%= japanese_short_date_with_weekday(@project.work_date) %>
+      <%= @project.start_time.strftime("%H:%M") %>〜<%= @project.end_time.strftime("%H:%M") %>
+    </h2>
+    <div class="assignment-meta">
+      <span class="assignment-location"><%= @project.location %></span>
+      <span class="assignment-title"><%= @project.title %></span>
+    </div>
+    <div class="assignment-required">
+      必要人数：<strong><%= @project.required_number %>人</strong>
+      （あと<strong><%= @project.required_number - @assigned_users.size %>人</strong>）
+    </div>
+  </div>
+
+  <!-- 確定済みセクション -->
+  <div class="panel panel--success assignment-section">
+    <div class="panel__header">
+      <%= image_tag "icon__check.svg", class: "icon-sm", alt: "確定済み" %>
+      <span class="panel__title">確定済み</span>
+    </div>
+    <div class="panel__body assignment-list">
+      <% @assigned_users.each do |sa| %>
+        <div class="chip chip--primary"><%= sa.user.name %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 希望提出者セクション -->
+  <div class="panel panel--info assignment-section">
+    <div class="panel__header">
+      <%= image_tag "icon__warning_blue", class: "icon-sm", alt: "シフト希望" %>
+      <span class="panel__title">シフト希望提出者</span>
+    </div>
+    <div class="panel__body assignment-list">
+      <% @shift_requests.each do |req| %>
+        <div class="chip"><%= req.user.name %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- アクションボタン -->
+  <div class="assignment-actions">
+    <%= button_to "割り当て完了",
+                  complete_manager_project_assignment_path(@project),
+                  method: :patch,
+                  class: "btn btn--primary btn--large" %>
+  </div>
+</div>

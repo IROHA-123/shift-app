@@ -1,8 +1,4 @@
-/* プロジェクト新規登録画面 */
-
-.project-new {
-  padding: 24px;
-}
+/* .project-new {} */
 
 .project-new__header {
   display: flex;
@@ -10,12 +6,6 @@
   justify-content: space-between;
   margin-bottom: 24px;
 }
-
-.project-new__title {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
 .project-new__csv-btn {
   display: inline-flex;
   align-items: center;
@@ -28,43 +18,49 @@
 }
 .project-new__csv-btn:hover {
   background: #f0f0f0;
+  transform: scale(1.05);
+  transition: 0.3s ease;
 }
 .project-new__csv-icon {
   width: 16px;
   height: auto;
   margin-right: 8px;
 }
-
+/* --------------------------------------  */
 .project-new__card {
-  background: #ffffff;
-  padding: 32px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  max-width: 600px;
   margin: 0 auto;
+  padding: 100px 180px 80px;
+  min-width: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.10);
+}
+
+.project-new__field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .project-new__form-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  row-gap: 16px;
-  column-gap: 16px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .project-new__label {
-  font-size: 1rem;
+  width: 100px;
   color: #333333;
 }
 
 .project-new__input,
 .project-new__select {
-  width: 100%;
   padding: 8px 12px;
-  border: 1px solid #cccccc;
+  flex: 1;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .project-new__time-range {
@@ -73,7 +69,8 @@
 }
 
 .project-new__time-input {
-  width: 100px;
+  width: 120px;
+  cursor: pointer;
 }
 
 .project-new__tilde {
@@ -83,18 +80,19 @@
 
 .project-new__actions {
   text-align: center;
-  margin-top: 24px;
+  margin-top: 60px;
 }
 
 .project-new__submit-btn {
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.15);
   padding: 12px 48px;
-  background: #22a6f7;
-  border: none;
-  border-radius: 24px;
+  background: var(--primary5-color);
+  border-radius: 10px;
   color: #ffffff;
-  font-size: 1rem;
   cursor: pointer;
 }
 .project-new__submit-btn:hover {
-  background: #1e90ff;
+  background: #5fc9f7;
+  transform: scale(1.05);
+  transition: 0.3s ease;
 }

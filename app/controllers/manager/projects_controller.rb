@@ -20,6 +20,13 @@ class Manager::ProjectsController < ApplicationController
     end
   end
 
+  def assignment
+    @project = Project.find(params[:id])
+    @assigned_users = @project.shift_assignments.includes(:user)
+    @shift_requests = @project.shift_requests.includes(:user)
+  end
+
+  # ----------------------------------------------------------------
   private
 
   def project_params

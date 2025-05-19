@@ -45,7 +45,12 @@ Rails.application.routes.draw do
     end
     
     # その他 CRUD
-    resources :projects,      only: [:index, :new, :create, :update]
+    resources :projects, only: [:index, :new, :create, :update] do
+      member do
+        get :assignment  # /manager/projects/:id/assignment にマッピング
+        patch :complete_assignment
+      end
+    end
     resources :users,         only: [:index, :new, :create, :update]
   end
 

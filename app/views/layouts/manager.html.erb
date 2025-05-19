@@ -59,21 +59,17 @@
 
         <div 
           class="tooltip-container"
-          data-controller="tooltip">
-          <div
           data-action="mouseenter->tooltip#show mouseleave->tooltip#hide"
-          class="tooltip-trigger"
-          >
-            <%= button_to destroy_user_session_path,
-                method: :delete,
-                class: "logout-button tooltip-trigger" do %>
-              <%= image_tag "icon__logout.svg", class:"menu-icon", alt: "ログアウト" %>
-            <% end %>
-            <span 
-              class="tooltip"
-              data-tooltip-target="text">ログアウト
-            </span>
-          </div>
+          data-controller="tooltip">
+          <%= button_to destroy_user_session_path,
+              method: :delete,
+              class: "logout-button" do %>
+            <%= image_tag "icon__logout.svg", class:"menu-icon", alt: "ログアウト" %>
+          <% end %>
+          <span
+            class="tooltip-right"
+            data-tooltip-target="text">ログアウト
+          </span>
         </div>
       </aside>
 

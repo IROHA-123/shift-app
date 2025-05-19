@@ -41,7 +41,7 @@
       <tbody>
         <% @projects.each do |project| %>
           <tr>
-            <td><%= project.work_date.strftime("%-m/%d（%a）") %></td>
+            <td><%= japanese_short_date_with_weekday(project.work_date) %></td>
             <td><%= project.title %></td>
             <td>
               <%= project.start_time.strftime("%H:%M") %>〜

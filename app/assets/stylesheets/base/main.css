@@ -26,7 +26,7 @@
 
 body {
   font-family: "Noto Sans JP", sans-serif;
-  color: var(--secondary9--color);
+  color: var(--text-color);
   user-select: none;
 }
 

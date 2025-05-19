@@ -1,4 +1,3 @@
-# app/controllers/manager/confirmed_controller.rb
 module Manager
   class ConfirmedController < ApplicationController
     layout "manager"

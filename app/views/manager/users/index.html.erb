@@ -1,54 +1,71 @@
 
-<h2>ユーザー管理</h2>
+<h2 class="user-title">ユーザー管理</h2>
 
-<div class="user-header">
-  <input type="text" placeholder="ユーザーを検索" class="user-search">
-</div>
+<div class="search-container">
 
-<table class="user-table">
-  <thead>
-    <tr>
-      <th>従業員ID</th>
-      <th>氏名</th>
-      <th>入社日</th>
-      <th>勤務形態</th>
-      <th>習熟度</th>
-      <th>メールアドレス</th>
-      <th>権限</th>
-      <th></th> <!-- メニュー用 -->
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.employee_id %></td>
-        <td><%= user.name %></td>
-        <td><%= user.joined_on.try(:strftime, "%Y/%-m/%-d") %></td>
-        <td><%= user.work_style %></td>
-        <td>
-          <%= form_with url: manager_user_path(user), method: :patch, local: true do |f| %>
-            <%= select_tag "user[skill_level]",
-              options_for_select([3, 2, 1, 0], selected: user.skill_level.to_i),
-              onchange: 'this.form.submit();',
-              class: "skill-level-select" %>
-          <% end %>
-        </td>
-        <td><%= user.email %></td>
-        <td><%= user.role == "admin" ? "管理者" : "スタッフ" %></td>
-        <td><div class="user-options">⋮</div></td>
-      </tr>
+  <div class="search-box">
+    <%= label_tag :search, class: "search-box__label" do %>
+      <%= image_tag "icon__search.svg", alt: "検索", class: "search-box__img" %>
     <% end %>
-  </tbody>
-</table>
-
-<!-- modal -->
-<div data-controller="modal">
-
-  <div class="tooltip-container" data-action="click->modal#open">
-    <div class="floating-button">＋</div>
-    <div class="tooltip">新規ユーザー登録</div>
+    <%= text_field_tag :search, nil, placeholder: "ユーザーを検索", class: "search-box__input", id: "search" %>
   </div>
-  <%= render partial:"modal_new" %>
+
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>従業員ID</th>
+        <th>氏名</th>
+        <th>入社日</th>
+        <th>勤務形態</th>
+        <th>習熟度</th>
+        <th>メールアドレス</th>
+        <th>権限</th>
+        <th></th> <!-- メニュー用 -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.employee_id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.joined_on.try(:strftime, "%Y/%-m/%-d") %></td>
+          <td><%= user.work_style %></td>
+          <td>
+            <div data-controller="level">
+              <%= form_with url: manager_user_path(user), method: :patch, local: true do |f| %>
+                <%= select_tag "user[skill_level]",
+                  options_for_select([3, 2, 1, 0], selected: user.skill_level.to_i),
+                  onchange: "this.form.submit();",
+                  class: "skill-level-select",
+                  data: { level_target: "select" } %>
+              <% end %>
+            </div>
+          </td>
+          <td><%= user.email %></td>
+          <td><%= user.role == "admin" ? "管理者" : "スタッフ" %></td>
+          <td><div class="user-options">⋮</div></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- 新規ユーザー登録ボタン ＆ modal -->
+  <div
+    class="btn-container" 
+    data-controller="modal">
+    <div
+      class="tooltip-container"
+      data-controller="tooltip"
+      data-action="click->modal#open
+                  mouseenter->tooltip#show mouseleave->tooltip#hide">
+      <div class="floating-button">＋</div>
+      <div
+        class="tooltip-top"
+        data-tooltip-target="text">新規ユーザー登録</div>
+    </div>
+    <%= render partial:"modal_new" %>
+  </div>
+  <!-- modalここまで -->
 
 </div>
-<!-- modalここまで -->

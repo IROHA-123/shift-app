@@ -1,7 +1,10 @@
+body {
+  background-color: var(--main--bg);
+}
+
 .manager-layout {
   display: flex;
   min-height: 100vh;
-  font-family: 'Noto Sans JP', sans-serif;
 }
 
 /*------------------------------------------
@@ -109,35 +112,59 @@ tooltip
   display: inline-block;
 }
 
-.tooltip {
+.tooltip-top {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  bottom: 125%; /* or top / left / right */
+  bottom: 120%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
   color: #fff;
-  padding: 6px 10px;
+  padding: 12px 18px;
   border-radius: 4px;
   white-space: nowrap;
   font-size: 12px;
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: opacity 0.3s ease;
+  font-weight: 400;
 }
 
-.tooltip-container:hover .tooltip-text {
+.tooltip-right {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 10%;
+  left: 30%;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+  font-weight: 400;
+}
+
+.tooltip-top.visible, .tooltip-right.visible {
   visibility: visible;
   opacity: 1;
 }
-
 
 /*-----------------------------------------
 main-content
 ------------------------------------------*/
 
 .main-content {
-  padding: 80px 70px ;
-  background-color: var(--main--bg);
+  padding: 70px 80px ;
+  
+}
+
+h2 {
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 700;
 }
