@@ -25,32 +25,55 @@
         </div>
 
         <nav class="menu">
-          <%= link_to manager_assignments_path, class: "menu-item #{'active' if current_page?(manager_assignments_path)}" do %>
-            <%= image_tag "icon__shift.svg", class: "menu-icon shift-icon", alt: "割り当て状況" %>
-            <span>割り当て状況</span>
-          <% end %>
-
-          <%= link_to manager_confirmed_index_path, class: "menu-item #{'active' if current_page?(manager_confirmed_index_path)}" do %>
-            <%= image_tag "icon__shift_checked.svg", class: "menu-icon shift-icon", alt: "確定シフト" %>
-            <span>確定シフト</span>
-          <% end %>
-
-          <%= link_to new_manager_project_path, class: "menu-item #{'active' if current_page?(new_manager_project_path)}" do %>
-            <%= image_tag "icon__plus.svg", class: "menu-icon", alt: "案件登録" %>
-            <span>案件登録</span>
-          <% end %>
-
-          <%= link_to manager_users_path, class: "menu-item #{'active' if current_page?(manager_users_path)}" do %>
-            <%= image_tag "icon__user.svg", class: "menu-icon", alt: "ユーザー管理" %>
-            <span>ユーザー管理</span>
-          <% end %>
+          <ul>
+            <li>
+              <%= link_to manager_assignments_path,
+                  class: "menu-item #{'active' if current_page?(manager_assignments_path)}" do %>
+                <%= image_tag "icon__shift.svg", class: "menu-icon shift-icon", alt: "割り当て状況" %>
+                <span>割り当て状況</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to manager_confirmations_path,
+                    class: "menu-item #{'active' if current_page?(manager_confirmations_path)}" do %>
+                <%= image_tag "icon__shift_checked.svg", class: "menu-icon shift-icon", alt: "確定シフト" %>
+                <span>確定シフト</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_manager_project_path,
+                  class: "menu-item #{'active' if current_page?(new_manager_project_path)}" do %>
+                <%= image_tag "icon__plus.svg", class: "menu-icon", alt: "案件登録" %>
+                <span>案件登録</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to manager_users_path,
+                  class: "menu-item #{'active' if current_page?(manager_users_path)}" do %>
+                <%= image_tag "icon__user.svg", class: "menu-icon", alt: "ユーザー管理" %>
+                <span>ユーザー管理</span>
+              <% end %>
+            </li>
+          </ul>
         </nav>
 
-        <div class="logout-tooltip-container">
-          <%= button_to destroy_user_session_path, method: :delete, class: "logout-button" do %>
-            <%= image_tag "icon__logout.svg", class:"menu-icon", alt: "ログアウト" %>
-          <% end %>
-          <span class="logout-tooltip-text">ログアウト</span>
+        <div 
+          class="tooltip-container"
+          data-controller="tooltip">
+          <div
+          data-action="mouseenter->tooltip#show mouseleave->tooltip#hide"
+          class="tooltip-trigger"
+          >
+            <%= button_to destroy_user_session_path,
+                method: :delete,
+                class: "logout-button tooltip-trigger" do %>
+              <%= image_tag "icon__logout.svg", class:"menu-icon", alt: "ログアウト" %>
+            <% end %>
+            <span 
+              class="tooltip"
+              data-tooltip-target="text">ログアウト
+            </span>
+          </div>
         </div>
       </aside>
 

@@ -27,12 +27,27 @@ Rails.application.routes.draw do
     end
   end 
 
+  # ------------------------------------------------------------------
+  
   # 管理者画面（Shift Manager）
   namespace :manager do
-    get 'assignments/index'
-      resources :assignments, only: [:index]
-      resources :confirmed, only: [:index, :update]
-      resources :projects, only: [:index, :new, :create, :update]
-      resources :users, only: [:index, :new, :create, :update]
+    # 案件割当一覧
+    resources :assignments,   only: [:index]
+
+    # 確定シフト一覧＆更新（URL は /manager/confirmed/* のまま）
+    resources :confirmations,
+              path:       'confirmed',      # URL パスだけ “confirmed” に
+              controller: 'confirmed',      # コントローラは Manager::ConfirmedController
+              only:       [:index, :update] do
+      collection do
+        get :download
+      end
     end
+    
+    # その他 CRUD
+    resources :projects,      only: [:index, :new, :create, :update]
+    resources :users,         only: [:index, :new, :create, :update]
+  end
+
+
 end

@@ -1,0 +1,100 @@
+.confirmed-shifts {
+  padding: 24px;
+
+}
+
+.confirmed-shifts__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.confirmed-shifts__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.confirmed-shifts__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.confirmed-shifts__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  font-size: 1.25rem;
+  color: #666666;
+  cursor: pointer;
+}
+.confirmed-shifts__nav-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.confirmed-shifts__period {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.confirmed-shifts__download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.confirmed-shifts__download-btn img {
+  width: 20px;
+  height: auto;
+}
+.confirmed-shifts__download-btn:hover {
+  opacity: 0.8;
+}
+
+.confirmed-shifts__table-wrapper {
+  overflow-x: auto;
+}
+
+.confirmed-shifts__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.confirmed-shifts__table th,
+.confirmed-shifts__table td {
+  padding: 12px 8px;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.confirmed-shifts__table thead th {
+  background: #fafafb;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.confirmed-shifts__table tbody tr:nth-child(odd) {
+  background: #fcfcff;
+}
+
+.confirmed-shifts__table tbody tr:hover {
+  background: #f5faff;
+}
+
+.confirmed-shifts__cell--filled {
+  background: #daf1ff;
+}

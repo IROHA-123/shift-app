@@ -1,32 +1,55 @@
-<%# 新規案件登録画面 %>
+<div class="project-new">
+  <!-- ヘッダー -->
+  <div class="project-new__header">
+    <h2 class="project-new__title">新規案件登録</h2>
+    <button type="button" class="project-new__csv-btn">
+      <%= image_tag "icon__upload.svg", alt: "CSVアップロード", class: "project-new__csv-icon" %>
+      CSVで一括アップロード
+    </button>
+  </div>
 
-<h2>案件を登録</h2>
-<%= form_with model: @project, url: admin_projects_path do |f| %>
-  <div>
-    <%= f.label :title, "案件名" %>
-    <%= f.text_field :title %>
+  <!-- フォームカード -->
+  <div class="project-new__card">
+    <%= form_with model: @project, url: manager_projects_path, local: true, class: "project-new__form" do |f| %>
+      <div class="project-new__form-grid">
+        <!-- 案件名 -->
+        <div class="project-new__field">
+          <%= f.label :title, "案件名", class: "project-new__label" %>
+          <%= f.text_field :title, placeholder: "○○様ご宴会", class: "project-new__input" %>
+        </div>
+        <!-- 日付 -->
+        <div class="project-new__field">
+          <%= f.label :work_date, "日付", class: "project-new__label" %>
+          <%= f.date_field :work_date, placeholder: "yyyy/mm/dd", class: "project-new__input" %>
+        </div>
+        <!-- 時間帯 -->
+        <div class="project-new__field">
+          <%= f.label :start_time, "時間帯", class: "project-new__label" %>
+          <div class="project-new__time-range">
+            <%= f.time_field :start_time, class: "project-new__input project-new__time-input" %>
+            <span class="project-new__tilde">〜</span>
+            <%= f.time_field :end_time,   class: "project-new__input project-new__time-input" %>
+          </div>
+        </div>
+        <!-- 会場 -->
+        <div class="project-new__field">
+          <%= f.label :location, "会場", class: "project-new__label" %>
+          <%= f.select :location,
+                options_for_select(@locations || []),
+                { prompt: "選択してください" },
+                class: "project-new__select" %>
+        </div>
+        <!-- 必要人数 -->
+        <div class="project-new__field">
+          <%= f.label :required_number, "必要人数", class: "project-new__label" %>
+          <%= f.number_field :required_number, min: 1, class: "project-new__input" %>
+        </div>
+      </div>
+
+      <!-- 登録ボタン -->
+      <div class="project-new__actions">
+        <%= f.submit "登録", class: "project-new__submit-btn" %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= f.label :work_date, "日付" %>
-    <%= f.date_field :work_date %>
-  </div>
-  </div>
-    <%= f.label :start_time, "開始時間" %>
-    <%= f.time_field :start_time %>
-  </div>
-  </div>
-    <%= f.label :end_time, "終了時間" %>
-    <%= f.time_field :end_time %>
-  </div>
-  </div>
-    <%= f.label :location, "場所" %>
-    <%= f.time_field :location %>
-  </div>
-  <div>
-    <%= f.label :required_number, "必要人数" %>
-    <%= f.number_field :required_number %>
-  </div>
-  <div>
-    <%= f.submit "登録する" %>
-  </div>
-<% end %>
+</div>

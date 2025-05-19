@@ -58,12 +58,7 @@
 }
 /* 新規ユーザー追加ボタン -------------------------------------------- */
 
-.tooltip-container {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  z-index: 100;
-}
+
 
 .floating-button {
   display: inline-block;
@@ -84,38 +79,7 @@
   transform: scale(1.1);
 }
 
-.tooltip {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 8px;
-  background-color: #333;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
 
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: #333 transparent transparent transparent;
-}
-
-.tooltip-container:hover .tooltip {
-  opacity: 1;
-}
 
 select.skill-level-select {
   padding: 6px 10px;

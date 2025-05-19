@@ -1,0 +1,100 @@
+/* プロジェクト新規登録画面 */
+
+.project-new {
+  padding: 24px;
+}
+
+.project-new__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.project-new__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.project-new__csv-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+.project-new__csv-btn:hover {
+  background: #f0f0f0;
+}
+.project-new__csv-icon {
+  width: 16px;
+  height: auto;
+  margin-right: 8px;
+}
+
+.project-new__card {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.project-new__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  row-gap: 16px;
+  column-gap: 16px;
+  align-items: center;
+}
+
+.project-new__label {
+  font-size: 1rem;
+  color: #333333;
+}
+
+.project-new__input,
+.project-new__select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.project-new__time-range {
+  display: flex;
+  align-items: center;
+}
+
+.project-new__time-input {
+  width: 100px;
+}
+
+.project-new__tilde {
+  margin: 0 8px;
+  color: #666666;
+}
+
+.project-new__actions {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.project-new__submit-btn {
+  padding: 12px 48px;
+  background: #22a6f7;
+  border: none;
+  border-radius: 24px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.project-new__submit-btn:hover {
+  background: #1e90ff;
+}

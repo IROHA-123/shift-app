@@ -1,0 +1,23 @@
+.assignment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.assignment-table th, .assignment-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+.status {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.status.done {
+  background-color: var(--secondary1-color);
+}
+.status.warn {
+  background-color: var(--accent-y3-color);
+}
+.status.danger {
+  background-color: var(--accent-red3-color);
+}
