@@ -10,4 +10,5 @@ module ApplicationHelper
     wdays = %w(日 月 火 水 木 金 土)
     date.strftime("%-m/%d（#{wdays[date.wday]}）")
   end
+
 end

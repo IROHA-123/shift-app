@@ -31,28 +31,61 @@ Rails.application.routes.draw do
   
   # 管理者画面（Shift Manager）
   namespace :manager do
-    # 案件割当一覧
-    resources :assignments,   only: [:index]
-
-    # 確定シフト一覧＆更新（URL は /manager/confirmed/* のまま）
-    resources :confirmations,
-              path:       'confirmed',      # URL パスだけ “confirmed” に
-              controller: 'confirmed',      # コントローラは Manager::ConfirmedController
-              only:       [:index, :update] do
-      collection do
-        get :download
-      end
+  # ──────────────────────────────────────
+  # 1. 案件割当一覧 (Assignments#Index)
+  #    - GET /manager/assignments
+  #    - 一覧画面を表示するだけのルート
+  # ──────────────────────────────────────
+  resources :assignments, only: [:index] do
+    # 「collection do … end」で定義するのは
+    # /manager/assignments/:id ではなく
+    # /manager/assignments/* のように
+    # コレクション全体に対するルートです。
+    collection do
+      # PATCH /manager/assignments/update_members
+      # ここにまとめてPOST (PATCH) して、配置メンバーを更新するアクションを作ります
+      patch :update_members
     end
-    
-    # その他 CRUD
-    resources :projects, only: [:index, :new, :create, :update] do
-      member do
-        get :assignment  # /manager/projects/:id/assignment にマッピング
-        patch :complete_assignment
-      end
-    end
-    resources :users,         only: [:index, :new, :create, :update]
   end
+
+  # ──────────────────────────────────────
+  # 2. 確定シフト一覧＆更新 (ConfirmationsController)
+  #    - パスだけ confirmed にマッピング
+  #    - URL: /manager/confirmed
+  # ──────────────────────────────────────
+  resources :confirmations,
+            path:       'confirmed',      # URLパスだけ "confirmed" に
+            controller: 'confirmed',      # Manager::ConfirmedController を使う
+            only:       [:index, :update] do
+    collection do
+      get :download   # /manager/confirmed/download
+    end
+  end
+
+  # ──────────────────────────────────────
+  # 3. その他 CRUD（ProjectsController & UsersController）
+  #    Projects: index, new, create, update ＋
+  #      - 個別割当画面 (assignment)
+  #      - 完了処理        (complete_assignment)
+  #    Users   : index, new, create, update
+  # ──────────────────────────────────────
+  resources :projects, only: [:index, :new, :create, :update] do
+    member do
+      # GET  /manager/projects/:id/assignment
+      # → Manager::ProjectsController#assignment
+      get   :assignment
+
+      # PATCH /manager/projects/:id/complete_assignment
+      # → Manager::ProjectsController#complete_assignment
+      patch :complete_assignment
+      # クリックで確定⇔希望を切り替える
+      patch :toggle_request
+    end
+  end
+
+  resources :users, only: [:index, :new, :create, :update]
+end
+
 
 
 end

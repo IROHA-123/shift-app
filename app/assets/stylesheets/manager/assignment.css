@@ -75,3 +75,148 @@
 .status.danger:hover {
   background-color: #ffedf1;
 }
+
+/* -----------------------------------------
+各編集ページ
+-------------------------------------------- */
+
+/* メインコンテナ */
+.assignment-drawer {
+  position: relative;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 閉じるボタン */
+.close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* hover で薄く */
+  transition: opacity 0.2s;
+}
+.close img {
+  width: 20px;
+  height: 20px;
+
+}
+.close:hover {
+  opacity: 0.7;
+}
+
+/* ヘッダー部 */
+.assignment-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+.assignment-date {
+  flex: 1 1 100%;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.assignment-meta {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 16px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.assignment-required {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: right;
+}
+
+/* パネル共通 ------------------------------------------------------ */
+.assignment-section {
+  margin-bottom: 24px;
+}
+
+.panel {
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 16px;
+}
+.panel__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.panel__title {
+  margin-left: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* 確定済みエリア */
+.panel--success {
+  background-color: #f0fbf4;
+  border-color: #d4f5dd;
+}
+
+/* シフト希望者エリア */
+.icon-sm {
+  width: 25px;
+}
+.panel--info {
+  background-color: #f2f9ff;
+  border-color: #d0eaff;
+}
+
+/* チップ（ユーザー名） */
+.assignment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 12px;
+  border-radius: 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.chip--primary {
+  background-color: #d4f5dd;
+  border-color: #c0e8c5;
+}
+
+/* アクションボタン */
+.assignment-actions {
+  text-align: right;
+  margin-top: 32px;
+}
+
+.btn--primary {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #32b4f7;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn--primary:hover {
+  background-color: #28a0d1;
+}

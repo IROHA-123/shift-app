@@ -1,9 +1,9 @@
-<%# app/views/manager/projects/assignment.html.erb %>
-<%# レイアウト“manager”を使っている前提です %>
+<div class="assignment-drawer"
+    data-controller="toggle-user"
+    data-toggle-user-project-id-value="<%= @project.id %>">
 
-<div class="assignment-drawer">
   <!-- 閉じるボタン -->
-  <%= link_to manager_projects_path, class: "drawer-close" do %>
+  <%= link_to manager_assignments_path, class: "close" do %>
     <%= image_tag "menu__close.svg", alt: "閉じる" %>
   <% end %>
 
@@ -31,7 +31,12 @@
     </div>
     <div class="panel__body assignment-list">
       <% @assigned_users.each do |sa| %>
-        <div class="chip chip--primary"><%= sa.user.name %></div>
+        <button type="button"
+                class="chip chip--primary"
+                data-action="click->toggle-user#toggle"
+                data-toggle-user-user-id-value="<%= sa.user.id %>">
+          <%= sa.user.name %>
+        </button>
       <% end %>
     </div>
   </div>
@@ -39,12 +44,17 @@
   <!-- 希望提出者セクション -->
   <div class="panel panel--info assignment-section">
     <div class="panel__header">
-      <%= image_tag "icon__warning_blue", class: "icon-sm", alt: "シフト希望" %>
+      <%= image_tag "icon__warning_blue.svg", class: "icon-sm", alt: "シフト希望" %>
       <span class="panel__title">シフト希望提出者</span>
     </div>
     <div class="panel__body assignment-list">
       <% @shift_requests.each do |req| %>
-        <div class="chip"><%= req.user.name %></div>
+        <button type="button"
+                class="chip"
+                data-action="click->toggle-user#toggle"
+                data-toggle-user-user-id-value="<%= req.user.id %>">
+          <%= req.user.name %>
+        </button>
       <% end %>
     </div>
   </div>
@@ -52,8 +62,8 @@
   <!-- アクションボタン -->
   <div class="assignment-actions">
     <%= button_to "割り当て完了",
-                  complete_manager_project_assignment_path(@project),
+                  complete_assignment_manager_project_path(@project),
                   method: :patch,
-                  class: "btn btn--primary btn--large" %>
+                  class: "btn btn--primary" %>
   </div>
 </div>

@@ -1,2 +1,0 @@
-module Manager::AssignmentHelper
-end
