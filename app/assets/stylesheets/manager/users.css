@@ -2,6 +2,8 @@
   margin-bottom: 0px;
 }
 
+/* ユーザーを検索 ----------------------------- */
+
 .search-box {
   position: relative;
   width: 220px;
@@ -38,7 +40,7 @@
 }
 
 
-/* ユーザーを検索 ----------------------------- */
+/* ユーザーテーブル ----------------------------- */
 
 .user-table {
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.04);
@@ -67,11 +69,19 @@
   background: #f5faff;
 }
 
+.col-username, .col-startdate, .col-workstyle, .col-userlevel {
+  width: 130px;
+}
+
+.col-mail {
+  font-size: 14px;
+}
 
 /* 習熟度プルダウン -------------------------------------------- */
 
 select.skill-level-select {
   /* padding: 6px 10px; */
+  width: 100%;
   min-width: 90px;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -90,6 +100,9 @@ select.skill-level-select {
 /* 新規ユーザー追加ボタン -------------------------------------------- */
 
 .btn-container {
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
   width: 50px;
   margin-left: auto;
 }
@@ -99,18 +112,18 @@ select.skill-level-select {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: var(--primary6-color);
+  background-color: var(--primary5-color);
   color: white;
   font-size: 30px;
   text-align: center;
   line-height: 50px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
 .floating-button:hover {
-  background-color: #1976d2;
+  background-color: #65d1fc;
   transform: scale(1.1);
 }
 

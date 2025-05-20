@@ -1,6 +1,7 @@
 <div class="assignment-drawer"
     data-controller="toggle-user"
-    data-toggle-user-project-id-value="<%= @project.id %>">
+    data-toggle-user-project-id-value="<%= @project.id %>"
+    data-toggle-user-required-number-value="<%= @project.required_number %>">
 
   <!-- 閉じるボタン -->
   <%= link_to manager_assignments_path, class: "close" do %>
@@ -13,13 +14,19 @@
       <%= japanese_short_date_with_weekday(@project.work_date) %>
       <%= @project.start_time.strftime("%H:%M") %>〜<%= @project.end_time.strftime("%H:%M") %>
     </h2>
+
+    <!-- 場所・タイトル -->
     <div class="assignment-meta">
       <span class="assignment-location"><%= @project.location %></span>
       <span class="assignment-title"><%= @project.title %></span>
     </div>
+    <!-- 必要人数（残り） -->
     <div class="assignment-required">
-      必要人数：<strong><%= @project.required_number %>人</strong>
-      （あと<strong><%= @project.required_number - @assigned_users.size %>人</strong>）
+      必要人数：<%= @project.required_number %>人
+      （あと
+        <span class="highlight" data-toggle-user-target="remainingCount">
+          <%= @project.required_number - @assigned_users.size %>
+        </span>人）
     </div>
   </div>
 
@@ -32,9 +39,10 @@
     <div class="panel__body assignment-list">
       <% @assigned_users.each do |sa| %>
         <button type="button"
-                class="chip chip--primary"
+                class="chip level-<%= sa.user.skill_level %>"
                 data-action="click->toggle-user#toggle"
-                data-toggle-user-user-id-value="<%= sa.user.id %>">
+                data-toggle-user-user-id-value="<%= sa.user.id %>"
+                data-skill-level="<%= sa.user.skill_level %>">
           <%= sa.user.name %>
         </button>
       <% end %>
@@ -50,20 +58,49 @@
     <div class="panel__body assignment-list">
       <% @shift_requests.each do |req| %>
         <button type="button"
-                class="chip"
+                class="chip level-<%= req.user.skill_level %>"
                 data-action="click->toggle-user#toggle"
-                data-toggle-user-user-id-value="<%= req.user.id %>">
+                data-toggle-user-user-id-value="<%= req.user.id %>"
+                data-skill-level="<%= req.user.skill_level %>">
           <%= req.user.name %>
         </button>
       <% end %>
     </div>
   </div>
 
-  <!-- アクションボタン -->
-  <div class="assignment-actions">
-    <%= button_to "割り当て完了",
-                  complete_assignment_manager_project_path(@project),
+
+  <!-- モーダル -->
+
+  <div class="confirm-btn-box" data-controller="confirm-assign">
+    <!-- form を手動で書くか、form_with でラップします -->
+    <%= form_with url: complete_assignment_manager_project_path(@project),
                   method: :patch,
-                  class: "btn btn--primary" %>
+                  local: true do |f| %>
+      <%= f.submit "割り当て完了",
+                  class: "btn--primary",
+                  data: { action: "confirm-assign#open" } %>
+    <% end %>
+
+    <!-- ここからモーダル。フォームの兄弟要素として配置 -->
+    <div class="modal-overlay hidden" data-confirm-assign-target="overlay">
+      <div class="modal-dialog">
+        <p class="modal-message">
+          シフトを確定して、スタッフに通知を送ります。よろしいですか？
+        </p>
+        <div class="modal-actions">
+          <button type="button"
+                  class="btn--secondary"
+                  data-action="confirm-assign#cancel">
+            キャンセル
+          </button>
+          <button type="button"
+                  class="btn--primary"
+                  data-action="confirm-assign#confirm">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>

@@ -15,10 +15,10 @@
     <thead>
       <tr>
         <th>従業員ID</th>
-        <th>氏名</th>
-        <th>入社日</th>
-        <th>勤務形態</th>
-        <th>習熟度</th>
+        <th class="col-username">氏名</th>
+        <th class="col-startdate">入社日</th>
+        <th class="col-workstyle">勤務形態</th>
+        <th class="col-userlevel">習熟度</th>
         <th>メールアドレス</th>
         <th>権限</th>
         <th></th> <!-- メニュー用 -->
@@ -28,10 +28,10 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= user.employee_id %></td>
-          <td><%= user.name %></td>
-          <td><%= user.joined_on.try(:strftime, "%Y/%-m/%-d") %></td>
-          <td><%= user.work_style %></td>
-          <td>
+          <td class="col-username"><%= user.name %></td>
+          <td class="col-startdate"><%= user.joined_on.try(:strftime, "%Y/%-m/%-d") %></td>
+          <td class="col-workstyle"><%= user.work_style %></td>
+          <td class="col-userlevel">
             <div data-controller="level">
               <%= form_with url: manager_user_path(user), method: :patch, local: true do |f| %>
                 <%= select_tag "user[skill_level]",
@@ -42,7 +42,7 @@
               <% end %>
             </div>
           </td>
-          <td><%= user.email %></td>
+          <td class="col-mail"><%= user.email %></td>
           <td><%= user.role == "admin" ? "管理者" : "スタッフ" %></td>
           <td><div class="user-options">⋮</div></td>
         </tr>

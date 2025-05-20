@@ -2,7 +2,7 @@
   <!-- ヘッダー -->
   <div class="project-new__header">
     <h2 class="project-new__title">新規案件登録</h2>
-    <button type="button" class="project-new__csv-btn">
+    <button type="button" class="btn--secondary">
       <%= image_tag "icon__upload.svg", alt: "CSVアップロード", class: "project-new__csv-icon" %>
       CSVで一括アップロード
     </button>
@@ -48,7 +48,7 @@
 
       <!-- 登録ボタン -->
       <div class="project-new__actions">
-        <%= f.submit "登録", class: "project-new__submit-btn" %>
+        <%= f.submit "登録", class: "btn--primary" %>
       </div>
     <% end %>
   </div>

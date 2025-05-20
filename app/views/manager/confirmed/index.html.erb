@@ -16,8 +16,8 @@
       <% end %>
 
       <%= link_to download_manager_confirmations_path(period: params[:period], format: :csv),
-                  class: "confirmed-shifts__download-btn" do %>
-        <%= image_tag "icon__download.svg", alt: "ダウンロード" %>
+                  class: "btn--secondary" do %>
+        <%= image_tag "icon__download.svg", alt: "ダウンロード", class: "icon_download" %>
       <% end %>
     </div>
   </div>

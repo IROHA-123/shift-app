@@ -2,10 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["modal", "body"]
-
-  connect() {
-    console.log("✅ ModalController connected!")
-  }
   
   open(event) {
     // ——————————————

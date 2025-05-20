@@ -39,36 +39,21 @@
   font-size: 1rem;
   white-space: nowrap;
 }
-
-.confirmed-shifts__download-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 63px;
-  height: 44px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  margin-left: 16px;
-  border: 1px solid var(--secondary2--color);
-  background-color: #FFF;
-  cursor: pointer;
-}
-.confirmed-shifts__download-btn img {
+.icon_download {
   width: 20px;
   height: auto;
-}
-.confirmed-shifts__download-btn:hover {
-  opacity: 0.8;
 }
 
 /* table ------------------------------ */
 
 .confirmed-shifts__table-wrapper {
+  width: 1200px;
   overflow-x: auto;
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.04);
 }
 
 .confirmed-shifts__table {
+  width: max-content;
   min-width: 800px;
 }
 
