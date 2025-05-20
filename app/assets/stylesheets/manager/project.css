@@ -17,7 +17,7 @@
   min-width: 400px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.1);
 }
 
 .project-new__field {
@@ -34,7 +34,6 @@
 
 .project-new__label {
   width: 100px;
-  color: #333333;
 }
 
 .project-new__input,

@@ -43,36 +43,6 @@ select {
   min-width: 60px;
 }
 
-/* --------------------------------------------
-　notice alert のトースト
---------------------------------------------- */
-.toast {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  opacity: 0;
-  z-index: 9999;
-  transition: opacity 0.5s ease, top 0.5s ease;
-  user-select: none;
-}
-
-.toast.show {
-  opacity: 1;
-}
-
-.toast__icon {
-  width: 20px;
-  height: 20px;
-}
 
 /* ---------------------------------------------------------
 　モーダル
@@ -158,7 +128,6 @@ button
 .btn--secondary {
   display: inline-flex;
   padding: 8px 12px;
-  /* min-width: 140px; */
   align-items: center;
   background-color: #fff;
   border: 1px solid #e0e0e0;

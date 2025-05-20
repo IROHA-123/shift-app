@@ -44,28 +44,34 @@
           </td>
           <td class="col-mail"><%= user.email %></td>
           <td><%= user.role == "admin" ? "管理者" : "スタッフ" %></td>
-          <td><div class="user-options">⋮</div></td>
+          <td class="user-options">
+            <div class="tooltip-container"
+                data-action="mouseenter->tooltip#show mouseleave->tooltip#hide"
+                data-controller="tooltip">
+              <span
+                class="tooltip-right"
+                data-tooltip-target="text">ユーザー編集
+              </span>
+              <%= link_to "⋮", edit_manager_user_path(user), class: "user-options-link"  %>
+            </div>
+          </td>
+
+          
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <!-- 新規ユーザー登録ボタン ＆ modal -->
-  <div
-    class="btn-container" 
-    data-controller="modal">
+  <!-- 新規ユーザー登録ボタン -->
+  <div class="btn-container">
     <div
       class="tooltip-container"
       data-controller="tooltip"
-      data-action="click->modal#open
-                  mouseenter->tooltip#show mouseleave->tooltip#hide">
-      <div class="floating-button">＋</div>
+      data-action="mouseenter->tooltip#show mouseleave->tooltip#hide">
       <div
         class="tooltip-top"
         data-tooltip-target="text">新規ユーザー登録</div>
+      <%= link_to "＋", new_manager_user_path, class:"floating-button"%>
     </div>
-    <%= render partial:"modal_new" %>
-  </div>
-  <!-- modalここまで -->
 
 </div>

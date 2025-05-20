@@ -4,18 +4,29 @@ class Manager::AssignmentsController < ApplicationController
   before_action :check_admin
 
   # ────────────────────────────────────
-  # 一覧表示：割り当て状況をテーブル形式で編集できるようにする
+  # 割り当て一覧画面
   # GET /manager/assignments
   # ────────────────────────────────────
   def index
-    # 各案件と、その案件に紐づく shift_assignments をまとめて取得
-    @projects = Project.includes(:shift_assignments).order(work_date: :asc)
+    # 1 表示期間を取得（デフォルトは今月）
+    period = params[:period] || Time.zone.today.strftime("%Y%m")
+    @start_date = Date.strptime(period, "%Y%m").beginning_of_month
+    @end_date   = @start_date.end_of_month
 
-    # プルダウンで選ぶ「ユーザー一覧」を用意
-    # [["田中 はな", 1], ["鈴木 太郎", 2], ...] の形に
+    # 2 前月・翌月の period を計算（画面右上のリンク用）
+    @prev_period = (@start_date - 1.month).strftime("%Y%m")
+    @next_period = (@start_date + 1.month).strftime("%Y%m")
+
+    # 3 表示期間内の案件のみ取得（N+1対策あり）
+    @projects = Project
+      .includes(:shift_assignments)
+      .where(work_date: @start_date..@end_date)  # ← これがポイント！
+      .order(work_date: :asc)
+
+    # 4 プルダウン用のユーザー一覧（名前とID）
     @users = User.order(:name).pluck(:name, :id)
 
-    # テーブルの列数を決めるため、必要人数の最大値を計算
+    # 5 必要人数の最大値（表の列数を決めるため）
     @max_slots = @projects.map(&:required_number).max || 0
   end
 

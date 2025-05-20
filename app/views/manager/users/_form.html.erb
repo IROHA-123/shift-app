@@ -1,0 +1,44 @@
+<%= form_with model: [:manager, user], local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :role, "権限", class: "form-label" %>
+    <%= f.select :role,
+        [["管理者","admin"],["スタッフ","staff"]],
+        { prompt: "選択してください" },
+        class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :joined_on, "入社日", class: "form-label" %>
+    <%= f.date_field :joined_on, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :employee_id, "従業員ID", class: "form-label" %>
+    <%= f.text_field :employee_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, "氏名", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :work_style, "勤務形態", class: "form-label" %>
+    <%= f.select :work_style,
+        ["正社員","アルバイト","業務委託"],
+        { prompt: "選択してください" },
+        class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "メールアドレス", class: "form-label" %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group button-group">
+    <button type="submit" class="btn--primary">
+      <%= image_tag "icon__check_white.svg", alt: "", class: "btn-icon" %>
+      <%= user.persisted? ? "更新する" : "登録する" %>
+    </button>
+  </div>
+<% end %>

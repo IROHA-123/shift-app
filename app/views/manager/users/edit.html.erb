@@ -1,0 +1,28 @@
+<% if @user.errors.any? %>
+  <ul class="error-messages">
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2 >ユーザー情報編集</h2>
+
+<div class="page-container">
+  <div class="form-header">
+    <!-- 閉じる（戻る）リンク -->
+    <%= link_to manager_users_path, class: "close-button" do %>
+      <%= image_tag "menu__close.svg", alt: "戻る" %>
+    <% end %>
+  </div>
+
+  <%= render 'form', user: @user %>
+
+  <%= button_to manager_user_path(@user), method: :delete,
+      data: { confirm: "本当にこのユーザーを削除しますか？" },
+      class: "btn--secondary delete-button" do %>
+    <%= image_tag "menu__close_2.svg", alt: "削除", class: "delete-icon" %>
+    ユーザーを削除する
+  <% end %>
+
+</div>

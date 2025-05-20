@@ -1,0 +1,25 @@
+<% if @user.errors.any? %>
+  <ul class="error-messages">
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2 >新規ユーザー登録</h2>
+
+<div class="page-container">
+  <div class="form-header">
+    <!-- 閉じる（戻る）リンク -->
+    <%= link_to manager_users_path, class: "close-button" do %>
+      <%= image_tag "menu__close.svg", alt: "戻る" %>
+    <% end %>
+  </div>
+
+    <%= render 'form', user: @user %>
+
+    <p class="helper-text">
+      ※新規ユーザーの場合、習熟度は0で登録されます
+    </p>
+
+</div>

@@ -20,14 +20,15 @@
       <span class="assignment-location"><%= @project.location %></span>
       <span class="assignment-title"><%= @project.title %></span>
     </div>
-    <!-- 必要人数（残り） -->
-    <div class="assignment-required">
-      必要人数：<%= @project.required_number %>人
-      （あと
-        <span class="highlight" data-toggle-user-target="remainingCount">
-          <%= @project.required_number - @assigned_users.size %>
-        </span>人）
-    </div>
+  </div>
+
+  <!-- 必要人数（残り） -->
+  <div class="assignment-required">
+    必要人数：<%= @project.required_number %>人
+    （あと
+      <span class="highlight" data-toggle-user-target="remainingCount">
+        <%= @project.required_number - @assigned_users.size %>
+      </span>人）
   </div>
 
   <!-- 確定済みセクション -->
@@ -81,7 +82,7 @@
                   data: { action: "confirm-assign#open" } %>
     <% end %>
 
-    <!-- ここからモーダル。フォームの兄弟要素として配置 -->
+    <!-- モーダル -->
     <div class="modal-overlay hidden" data-confirm-assign-target="overlay">
       <div class="modal-dialog">
         <p class="modal-message">
@@ -89,12 +90,12 @@
         </p>
         <div class="modal-actions">
           <button type="button"
-                  class="btn--secondary"
+                  class="btn--secondary btn--cancel"
                   data-action="confirm-assign#cancel">
             キャンセル
           </button>
           <button type="button"
-                  class="btn--primary"
+                  class="btn--primary btn--ok"
                   data-action="confirm-assign#confirm">
             OK
           </button>

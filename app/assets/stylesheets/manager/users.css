@@ -61,14 +61,13 @@
   vertical-align: middle;
 }
 
-.user-table td {
-  padding: 8px 15px;
-}
-
 .user-table tbody tr:hover {
   background: #f5faff;
 }
 
+.user-table td {
+  padding: 8px 15px;
+}
 .col-username, .col-startdate, .col-workstyle, .col-userlevel {
   width: 130px;
 }
@@ -92,10 +91,25 @@ select.skill-level-select {
 .skill-level-select.level-2 { background-color: var(--primary2-color); }
 .skill-level-select.level-3 { background-color: var(--primary3-color); }
 
-.user-options {
-  text-align: center;
+/* 編集アイコン -------------------------------------------- */
+
+td.user-options {
+  padding: 0;
   cursor: pointer;
 }
+
+.user-options  .tooltip-right {
+  left: 130%;
+}
+.user-options-link {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px; /* 左右のタッチ領域を確保 */
+  line-height: 1;  /* 高さ揃え */
+}
+
 
 /* 新規ユーザー追加ボタン -------------------------------------------- */
 
@@ -127,4 +141,104 @@ select.skill-level-select {
   transform: scale(1.1);
 }
 
+/* ------------------------------------------
+ユーザーフォーム（新規・編集）
+--------------------------------------------- */
 
+/* ページ全体のコンテナ */
+.page-container {
+  margin: 40px auto;
+  position: relative;
+  min-width: 400px;
+  padding: 50px 200px 80px 150px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ヘッダー */
+.form-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* 閉じるリンク */
+.close-button {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.close-button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* フォーム行 */
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* ラベル */
+.form-label {
+  width: 120px;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+/* 入力欄・セレクト共通 */
+.form-control {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;;
+}
+.form-control:focus {
+  outline: none;
+  border-color: #33bfff;
+  box-shadow: 0 0 0 2px rgba(51,191,255,0.2);
+}
+
+/* ボタン行を右寄せ */
+.button-group button {
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+/* ボタン内アイコン */
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* 補足テキスト */
+.helper-text {
+  position: absolute;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #999;
+  right: 30px;
+  bottom: 30px;
+}
+
+.delete-button {
+  position: absolute;
+  margin-top: 60px;
+  color: var(--accent-red5-color);
+  /* padding: 8px 24px; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  right: 18px;
+  bottom: 22px;
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}

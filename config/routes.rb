@@ -83,7 +83,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :new, :create, :update]
+  resources :users, only: [:index, :new, :create,:edit, :update]
 end
 
 

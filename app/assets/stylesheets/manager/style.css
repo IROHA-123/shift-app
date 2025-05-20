@@ -1,12 +1,52 @@
 body {
   background-color: var(--main--bg);
 }
-
 .manager-layout {
   display: flex;
   min-height: 100vh;
 }
 
+/*------------------------------------------
+トースト通知
+-------------------------------------------- */
+
+.toast {
+  position: fixed;
+  bottom: 38px;
+  right: 38px;
+  background-color: #333;
+  color: white;
+  padding: 24px 32px;
+  border-radius: 8px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: toast-fade-in-out 3s ease-in-out forwards;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@keyframes toast-fade-in-out {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
 /*------------------------------------------
 サイドバー 
 -------------------------------------------- */

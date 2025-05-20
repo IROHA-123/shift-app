@@ -14,6 +14,16 @@
   </head>
 
   <body>
+
+    <!--トースト通知-->
+    <% flash.each do |type, message| %>
+      <div class="toast toast-<%= type %>">
+        <%= image_tag "icon__check.svg", alt: "通知", class: "toast-icon" %>
+        <span><%= message %></span>
+      </div>
+    <% end %>
+
+
     <div class="manager-layout">
       <!-- Side menu -->
       <aside class="sidebar">
@@ -49,7 +59,7 @@
             </li>
             <li>
               <%= link_to manager_users_path,
-                  class: "menu-item #{'active' if current_page?(manager_users_path)}" do %>
+                  class: "menu-item #{ 'active' if request.path.start_with?(manager_users_path) }" do %>
                 <%= image_tag "icon__user.svg", class: "menu-icon", alt: "ユーザー管理" %>
                 <span>ユーザー管理</span>
               <% end %>

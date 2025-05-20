@@ -1,6 +1,22 @@
+.assignment-table-header {
+  display: flex;
+  justify-content: space-between; /* 左右に配置 */
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.assignment-shifts__control {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 矢印と日付の間隔 */
+}
+
 .assignment-table {
   box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.04);
+    width: max-content;
+    min-width: 800px;
 }
+
 .assignment-table thead {
   background-color: #f4f6f8;
 }
@@ -11,12 +27,19 @@
 .assignment-table th, .assignment-table td {
   padding: 10px;
   border: 1px solid #ddd;
-  text-align: center;
   vertical-align: middle;
 }
 
+.assignment-table th {
+  padding: 15px;
+}
 .assignment-table td {
   padding: 8px 15px;
+}
+
+.col-project-title {
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .col-location {
@@ -24,7 +47,7 @@
 }
 
 .col-number {
-  width: 90px;
+  min-width: 90px;
 }
 
 .assignment-table tbody tr:hover {
@@ -110,6 +133,7 @@
 .assignment-header {
   margin-bottom: 16px;
   font-weight: 600;
+  color: var(--secondary6--color);
 }
 
 /* 日付は常にフル幅 */
@@ -121,7 +145,7 @@
 
 /* 場所・タイトル */
 .assignment-meta {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   display: flex;
   gap: 16px;
   font-size: 1.1rem;
@@ -129,7 +153,10 @@
 
 /* 必要人数 */
 .assignment-required {
+  font-weight: 600;
+  margin-bottom: 16px;
   font-size: 0.9rem;
+  color: var(--secondary6--color);
 }
 
 /* 残り人数のハイライト */
@@ -156,7 +183,8 @@
 .panel__title {
   margin-left: 8px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  color: var(--secondary6--color);
 }
 
 /* 確定済みエリア */
@@ -213,7 +241,7 @@
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,15 +251,16 @@
 .modal-dialog {
   background: #fff;
   border-radius: 8px;
-  padding: 24px;
-  max-width: 400px;
+  padding: 58px 44px 44px;
+  min-width: 400px;
+  max-width: 700px;
   width: 90%;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   text-align: center;
 }
 
 .modal-message {
-  margin-bottom: 24px;
+  margin-bottom: 48px;
   font-size: 1rem;
   color: #333;
 }
@@ -239,5 +268,21 @@
 .modal-actions {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 48px;
+}
+
+.btn--secondary.btn--cancel {
+  background-color: var(--secondary5--color);
+  font-weight: 700;
+  color: white;
+  width: 120px;
+  text-align: center;
+  display: block;
+}
+
+.btn--primary.btn--ok {
+  display: block;
+  min-width:120px;
+  width: 120px;
+  text-align: center;
 }

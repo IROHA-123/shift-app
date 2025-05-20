@@ -54,6 +54,36 @@
   padding: 90px 0;
 }
 
+/* --------------------------------------------
+トースト通知
+--------------------------------------------- */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.5s ease, top 0.5s ease;
+  user-select: none;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.toast__icon {
+  width: 20px;
+  height: 20px;
+}
 
 
 /* -------------------------------------------------

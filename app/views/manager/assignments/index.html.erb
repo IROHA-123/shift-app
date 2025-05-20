@@ -1,14 +1,25 @@
-<h2>シフト割り当て状況</h2>
+<div class="assignment-table-header">
+  <h2>シフト割り当て状況</h2>
+
+  <div class="confirmed-shifts__controls assignment-shifts__control">
+    <%= link_to manager_assignments_path(period: @prev_period), class: "confirmed-shifts__nav-btn" do %> ‹ <% end %>
+    <span class="confirmed-shifts__period">
+      <%= @start_date.strftime("%Y/%m/%d") %> ～ <%= @end_date.strftime("%Y/%m/%d") %>
+    </span>
+    <%= link_to manager_assignments_path(period: @next_period), class: "confirmed-shifts__nav-btn" do %> › <% end %>
+  </div>
+</div>
+
 
 <table class="assignment-table">
   <thead>
     <tr>
       <th>日付</th>
+      <th class="col-project-title">案件名</th>
       <th>時間</th>
       <th class="col-location">会場</th>
       <th class="col-number">必要人数</th>
       <th class="col-number">確定人数</th>
-      <th class="col-number">残人数</th>
       <th>ステータス</th>
     </tr>
   </thead>
@@ -18,11 +29,12 @@
       <% remaining = project.required_number - confirmed %>
       <tr>
         <td><%= japanese_short_date_with_weekday(project.work_date) %></td>
+        <td class="col-project-title"><%= project.title %></td>
         <td><%= "#{project.start_time.strftime('%H:%M')}〜#{project.end_time.strftime('%H:%M')}" %></td>
         <td class="col-location"><%= project.location %></td>
         <td class="col-number"><%= project.required_number %></td>
         <td class="col-number"><%= confirmed %></td>
-        <td class="col-number"><%= remaining > 0 ? remaining : "-" %></td>
+        
         <!--ステータス-->
         <td>
           <% if remaining <= 0 %>
