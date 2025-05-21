@@ -1,7 +1,7 @@
 <div class="assignment-drawer"
-    data-controller="toggle-user"
-    data-toggle-user-project-id-value="<%= @project.id %>"
-    data-toggle-user-required-number-value="<%= @project.required_number %>">
+     data-controller="toggle-user confirm-assign"
+     data-toggle-user-project-id-value="<%= @project.id %>"
+     data-toggle-user-required-number-value="<%= @project.required_number %>">
 
   <!-- 閉じるボタン -->
   <%= link_to manager_assignments_path, class: "close" do %>
@@ -14,8 +14,6 @@
       <%= japanese_short_date_with_weekday(@project.work_date) %>
       <%= @project.start_time.strftime("%H:%M") %>〜<%= @project.end_time.strftime("%H:%M") %>
     </h2>
-
-    <!-- 場所・タイトル -->
     <div class="assignment-meta">
       <span class="assignment-location"><%= @project.location %></span>
       <span class="assignment-title"><%= @project.title %></span>
@@ -31,75 +29,82 @@
       </span>人）
   </div>
 
-  <!-- 確定済みセクション -->
-  <div class="panel panel--success assignment-section">
-    <div class="panel__header">
-      <%= image_tag "icon__check.svg", class: "icon-sm", alt: "確定済み" %>
-      <span class="panel__title">確定済み</span>
-    </div>
-    <div class="panel__body assignment-list">
+  <!-- フォーム開始 -->
+  <%= form_with url: update_members_manager_assignments_path,
+                method: :patch,
+                local: true,
+                html: { id: "assignment-form-#{@project.id}" } do |f| %>
+
+    <!-- hidden inputs のコンテナ -->
+    <div data-toggle-user-target="inputContainer">
       <% @assigned_users.each do |sa| %>
-        <button type="button"
-                class="chip level-<%= sa.user.skill_level %>"
-                data-action="click->toggle-user#toggle"
-                data-toggle-user-user-id-value="<%= sa.user.id %>"
-                data-skill-level="<%= sa.user.skill_level %>">
-          <%= sa.user.name %>
-        </button>
+        <%= hidden_field_tag "assignments[#{@project.id}][]", sa.user_id %>
       <% end %>
     </div>
-  </div>
 
-  <!-- 希望提出者セクション -->
-  <div class="panel panel--info assignment-section">
-    <div class="panel__header">
-      <%= image_tag "icon__warning_blue.svg", class: "icon-sm", alt: "シフト希望" %>
-      <span class="panel__title">シフト希望提出者</span>
+    <!-- 確定済みセクション -->
+    <div class="panel panel--success assignment-section">
+      <div class="panel__header">
+        <%= image_tag "icon__check.svg", class: "icon-sm", alt: "確定済み" %>
+        <span class="panel__title">確定済み</span>
+      </div>
+      <div class="panel__body assignment-list">
+        <% @assigned_users.each do |sa| %>
+          <button type="button"
+                  class="chip level-<%= sa.user.skill_level %> selected"
+                  data-action="click->toggle-user#toggle"
+                  data-toggle-user-user-id-value="<%= sa.user.id %>">
+            <%= sa.user.name %>
+          </button>
+        <% end %>
+      </div>
     </div>
-    <div class="panel__body assignment-list">
-      <% @shift_requests.each do |req| %>
-        <button type="button"
-                class="chip level-<%= req.user.skill_level %>"
-                data-action="click->toggle-user#toggle"
-                data-toggle-user-user-id-value="<%= req.user.id %>"
-                data-skill-level="<%= req.user.skill_level %>">
-          <%= req.user.name %>
-        </button>
-      <% end %>
+
+    <!-- 希望提出者セクション -->
+    <div class="panel panel--info assignment-section">
+      <div class="panel__header">
+        <%= image_tag "icon__warning_blue.svg", class: "icon-sm", alt: "シフト希望" %>
+        <span class="panel__title">シフト希望提出者</span>
+      </div>
+      <div class="panel__body assignment-list">
+        <% @shift_requests.each do |req| %>
+          <button type="button"
+                  class="chip level-<%= req.user.skill_level %>"
+                  data-action="click->toggle-user#toggle"
+                  data-toggle-user-user-id-value="<%= req.user.id %>">
+            <%= req.user.name %>
+          </button>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-
-  <!-- モーダル -->
-
-  <div class="confirm-btn-box" data-controller="confirm-assign">
-    <!-- form を手動で書くか、form_with でラップします -->
-    <%= form_with url: complete_assignment_manager_project_path(@project),
-                  method: :patch,
-                  local: true do |f| %>
+    <!-- 確認ボタン -->
+    <div class="confirm-btn-box">
       <%= f.submit "割り当て完了",
-                  class: "btn--primary",
-                  data: { action: "confirm-assign#open" } %>
-    <% end %>
+                   class: "btn--primary",
+                   data: { action: "confirm-assign#open" } %>
+    </div>
 
-    <!-- モーダル -->
-    <div class="modal-overlay hidden" data-confirm-assign-target="overlay">
-      <div class="modal-dialog">
-        <p class="modal-message">
-          シフトを確定して、スタッフに通知を送ります。よろしいですか？
-        </p>
-        <div class="modal-actions">
-          <button type="button"
-                  class="btn--secondary btn--cancel"
-                  data-action="confirm-assign#cancel">
-            キャンセル
-          </button>
-          <button type="button"
-                  class="btn--primary btn--ok"
-                  data-action="confirm-assign#confirm">
-            OK
-          </button>
-        </div>
+  <% end %>
+  <!-- フォームここまで -->
+
+  <!-- モーダル部分 -->
+  <div class="modal-overlay hidden" data-confirm-assign-target="overlay">
+    <div class="modal-dialog">
+      <p class="modal-message">
+        シフトを確定して、スタッフに通知を送ります。よろしいですか？
+      </p>
+      <div class="modal-actions">
+        <button type="button"
+                class="btn--secondary btn--cancel"
+                data-action="confirm-assign#cancel">
+          キャンセル
+        </button>
+        <button type="button"
+                class="btn--primary btn--ok"
+                data-action="confirm-assign#confirm">
+          OK
+        </button>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+// app/javascript/controllers/toggle_user_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -5,74 +6,56 @@ export default class extends Controller {
     projectId: Number,
     requiredNumber: Number
   }
+  static targets = ["remainingCount", "inputContainer"]
 
-  static targets = ["remainingCount"]
+  connect() {
+    // 初期選択ユーザーID一覧を hidden input から取得
+    this.selectedIds = Array.from(
+      this.inputContainerTarget.querySelectorAll("input")
+    ).map(i => i.value)
 
-  // チップをクリックしたときに呼ばれる
+    // リスト要素キャッシュ
+    this.successList = this.element.querySelector(".panel--success .assignment-list")
+    this.requestList = this.element.querySelector(".panel--info    .assignment-list")
+  }
+
   toggle(event) {
-    const button = event.currentTarget
-    const userId = button.dataset.toggleUserUserIdValue
-    const url    = `/manager/projects/${this.projectIdValue}/toggle_request`
+    const btn    = event.currentTarget
+    const userId = btn.dataset.toggleUserUserIdValue
 
-    fetch(url, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept":       "application/json",
-        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
-      },
-      body: JSON.stringify({ user_id: userId })
-    })
-    .then(res => res.json())
-    .then(data => {
-      // レスポンスの assigned/requested は ID の配列
-      this._refreshLists(data.assigned, data.requested)
-    })
-}
+    if (this.selectedIds.includes(userId)) {
+      // 外す
+      this.selectedIds = this.selectedIds.filter(id => id !== userId)
+      btn.classList.remove("selected")
+      this.requestList.appendChild(btn)
+    } else {
+      // 追加
+      this.selectedIds.push(userId)
+      btn.classList.add("selected")
+      this.successList.appendChild(btn)
+    }
 
-  _refreshLists(assignedIds, requestedIds) {
-    const drawer = this.element
-    const successList = drawer.querySelector(".panel--success .assignment-list")
-    const requestList = drawer.querySelector(".panel--info    .assignment-list")
+    // hidden input を再構築
+    this._refreshHiddenInputs()
 
-    // ID → 名前、skill levelのマップを作成
-    const nameMap = {}
-    const levelMap = {}
-    drawer.querySelectorAll("[data-toggle-user-user-id-value]").forEach(chip => {
-      const id = chip.dataset.toggleUserUserIdValue
-      nameMap[id] = chip.innerText.trim()
-      levelMap[id] = chip.dataset.skillLevel || 0
-    })
-
-    // リストをクリア
-    successList.innerHTML = ""
-    requestList.innerHTML = ""
-
-    // チップを再構築（levelも渡す）
-    assignedIds.forEach(id => {
-      successList.appendChild(this._buildChip(id, nameMap[id], "chip--primary", levelMap[id]))
-    })
-
-    requestedIds.forEach(id => {
-      requestList.appendChild(this._buildChip(id, nameMap[id], "", levelMap[id]))
-    })
-
-    // 残人数を再計算して表示を更新
+    // 残り人数更新
     if (this.hasRemainingCountTarget && this.hasRequiredNumberValue) {
-      const remaining = this.requiredNumberValue - assignedIds.length
+      const remaining = this.requiredNumberValue - this.selectedIds.length
       this.remainingCountTarget.textContent = remaining
     }
   }
 
-  // skillLevel引数を追加
-  _buildChip(id, name, extraClass, skillLevel = 0) {
-    const btn = document.createElement("button")
-    btn.type  = "button"
-    btn.className = ["chip", extraClass, `level-${skillLevel}`].filter(Boolean).join(" ")
-    btn.dataset.action = "click->toggle-user#toggle"
-    btn.dataset.toggleUserUserIdValue = id
-    btn.dataset.skillLevel = skillLevel
-    btn.textContent = name || "?"
-    return btn
+  _refreshHiddenInputs() {
+    // まずクリア
+    this.inputContainerTarget.innerHTML = ""
+
+    // 選択中IDごとに hidden input を作成
+    this.selectedIds.forEach(id => {
+      const input = document.createElement("input")
+      input.type  = "hidden"
+      input.name  = `assignments[${this.projectIdValue}][]`
+      input.value = id
+      this.inputContainerTarget.appendChild(input)
+    })
   }
 }

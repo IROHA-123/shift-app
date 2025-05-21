@@ -32,18 +32,13 @@ Rails.application.routes.draw do
   # 管理者画面（Shift Manager）
   namespace :manager do
   # ──────────────────────────────────────
-  # 1. 案件割当一覧 (Assignments#Index)
-  #    - GET /manager/assignments
-  #    - 一覧画面を表示するだけのルート
+  # 1. 案件割当一覧 
+  #   - GET /manager/assignments
+  #   - 一覧画面を表示するだけのルート
   # ──────────────────────────────────────
   resources :assignments, only: [:index] do
-    # 「collection do … end」で定義するのは
-    # /manager/assignments/:id ではなく
-    # /manager/assignments/* のように
-    # コレクション全体に対するルートです。
     collection do
-      # PATCH /manager/assignments/update_members
-      # ここにまとめてPOST (PATCH) して、配置メンバーを更新するアクションを作ります
+      # 配置メンバーを更新するアクション
       patch :update_members
     end
   end
@@ -54,11 +49,11 @@ Rails.application.routes.draw do
   #    - URL: /manager/confirmed
   # ──────────────────────────────────────
   resources :confirmations,
-            path:       'confirmed',      # URLパスだけ "confirmed" に
-            controller: 'confirmed',      # Manager::ConfirmedController を使う
+            path:       'confirmed',
+            controller: 'confirmed',
             only:       [:index, :update] do
     collection do
-      get :download   # /manager/confirmed/download
+      get :download
     end
   end
 

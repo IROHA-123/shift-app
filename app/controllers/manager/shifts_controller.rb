@@ -1,8 +1,4 @@
-# シフトを決定する
-
-class Manager::ShiftsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :require_admin
+class Manager::ShiftsController < Manager::BaseController
 
   def index
     @projects = Project.includes(:shift_requests, :shift_assignments, :users).order(:work_date)
@@ -18,9 +14,4 @@ class Manager::ShiftsController < ApplicationController
     end
   end
 
-  private
-
-  def require_admin
-    redirect_to root_path, alert: "権限がありません" unless current_user.admin?
-  end
 end

@@ -1,8 +1,4 @@
-class Manager::ProjectsController < ApplicationController
-  layout "manager"
-  before_action :authenticate_user!
-  before_action :check_admin
-
+class Manager::ProjectsController < Manager::BaseController
   # ────────────────────────────────────
   # GET /manager/projects
   # 案件一覧
@@ -33,9 +29,14 @@ class Manager::ProjectsController < ApplicationController
   # GET /manager/projects/:id/assignment
   # 個別割当編集画面
   def assignment
-    @project         = Project.find(params[:id])
-    @assigned_users  = @project.shift_assignments.includes(:user)
-    @shift_requests  = @project.shift_requests.includes(:user)
+    @project        = Project.find(params[:id])
+    # 確定済みの ShiftAssignment レコード
+    @assigned_users = @project.shift_assignments.includes(:user)
+    # 確定済みユーザーを除外した ShiftRequest レコード
+    assigned_ids    = @assigned_users.map(&:user_id)
+    @shift_requests = @project.shift_requests
+                              .includes(:user)
+                              .where.not(user_id: assigned_ids)
   end
 
   # ────────────────────────────────────
@@ -45,30 +46,21 @@ class Manager::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     user_id  = params.require(:user_id).to_i
 
-    if @project.shift_assignments.exists?(user_id: user_id)
-      # 確定済み → 希望 へ戻す
-      @project.shift_assignments.find_by(user_id: user_id).destroy
-      @project.shift_requests.create!(user_id: user_id)
-    elsif @project.shift_requests.exists?(user_id: user_id)
-      # 希望  → 確定済み へ移動
-      @project.shift_requests.find_by(user_id: user_id).destroy
-      @project.shift_assignments.create!(user_id: user_id)
-    end
+    # まずどちらのテーブルにもレコードがない状態にリセット
+    @project.shift_assignments.where(user_id: user_id).destroy_all
+    @project.shift_requests   .where(user_id: user_id).destroy_all
 
-    respond_to do |format|
-      format.html do
-        # HTML リクエストの場合は詳細画面にリダイレクト
-        redirect_to assignment_manager_project_path(@project),
-                    notice: "ステータスを切り替えました"
+    # 今現在確定済みなら、希望に戻す
+      if params[:from] == "assignment"
+        @project.shift_requests.create!(user_id: user_id)
+      else
+        @project.shift_assignments.create!(user_id: user_id)
       end
-      format.json do
-        # Ajax の場合は JSON を返却
-        render json: {
-          assigned:  @project.shift_assignments.pluck(:user_id),
-          requested: @project.shift_requests.pluck(:user_id)
-        }
-      end
-    end
+
+    render json: {
+      assigned:  @project.shift_assignments.pluck(:user_id),
+      requested: @project.shift_requests.pluck(:user_id)
+    }
   end
 
   private
@@ -77,10 +69,5 @@ class Manager::ProjectsController < ApplicationController
   def project_params
     params.require(:project)
           .permit(:title, :work_date, :start_time, :end_time, :location, :required_number)
-  end
-
-  # 管理者権限チェック
-  def check_admin
-    redirect_to root_path unless current_user.admin?
   end
 end

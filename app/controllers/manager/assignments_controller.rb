@@ -1,7 +1,4 @@
-class Manager::AssignmentsController < ApplicationController
-  layout "manager"
-  before_action :authenticate_user!
-  before_action :check_admin
+class Manager::AssignmentsController < Manager::BaseController
 
   # ────────────────────────────────────
   # 割り当て一覧画面
@@ -31,12 +28,10 @@ class Manager::AssignmentsController < ApplicationController
   end
 
   # ────────────────────────────────────
-  # 一括更新：プルダウンで選んだメンバーをまとめて保存する
-  # PATCH /manager/assignments/update_members
+  # 個別編集画面：チップで選んだメンバーをまとめて保存する
+  # PATCH manager/projects/id/assignment
   # ────────────────────────────────────
   def update_members
-    # params[:assignments] の形は
-    # { "3" => ["1","2",""], "4" => ["2","",""] } のようになっているはず
     assignments_params.each do |project_id, user_ids|
       project = Project.find(project_id)
 
@@ -44,6 +39,8 @@ class Manager::AssignmentsController < ApplicationController
       Project.transaction do
         # まず古い割り当てをクリア
         project.shift_assignments.destroy_all
+        project.shift_requests.destroy_all
+
 
         # 空文字を除き、重複を取り除いてから再作成
         user_ids.reject(&:blank?).uniq.each do |uid|
@@ -61,10 +58,5 @@ class Manager::AssignmentsController < ApplicationController
   # 内部は { "project_id" => [user_id, ...], ... } のハッシュ
   def assignments_params
     params.require(:assignments).permit!
-  end
-
-  # 管理者じゃない場合はトップへ
-  def check_admin
-    redirect_to root_path unless current_user.admin?
   end
 end

@@ -19,6 +19,7 @@
       <th>時間</th>
       <th class="col-location">会場</th>
       <th class="col-number">必要人数</th>
+      <th class="col-number">希望人数</th>
       <th class="col-number">確定人数</th>
       <th>ステータス</th>
     </tr>
@@ -33,6 +34,7 @@
         <td><%= "#{project.start_time.strftime('%H:%M')}〜#{project.end_time.strftime('%H:%M')}" %></td>
         <td class="col-location"><%= project.location %></td>
         <td class="col-number"><%= project.required_number %></td>
+        <td class="col-number"><%= project.shift_requests.count %></td>
         <td class="col-number"><%= confirmed %></td>
         
         <!--ステータス-->
