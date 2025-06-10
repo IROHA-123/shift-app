@@ -12,13 +12,14 @@ class Project < ApplicationRecord
     needed = required_number - shift_assignments.count
     return if needed <= 0
 
-    # 希望提出順に limit だけループして確定を作成
-    shift_requests.limit(needed).each do |req|
+    requests = shift_requests.limit(needed)
+
+    requests.each do |req|
       shift_assignments.create!(user: req.user)
     end
 
-    # （任意）既に割り当て済みの shift_requests は削除しておく
-    shift_requests.where(id: shift_assignments.pluck(:id)).destroy_all
+    # 割り当て完了後、対応する申請を削除
+    requests.destroy_all
   end
 
 end
