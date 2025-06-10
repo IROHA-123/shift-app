@@ -18,7 +18,9 @@ class Project < ApplicationRecord
     end
 
     # （任意）既に割り当て済みの shift_requests は削除しておく
-    shift_requests.where(id: shift_assignments.pluck(:id)).destroy_all
+    #   shift_assignments の ID を参照していたため削除対象を誤っていた
+    #   ユーザーIDで絞り込み、対応する ShiftRequest を削除する
+    shift_requests.where(user_id: shift_assignments.pluck(:user_id)).destroy_all
   end
 
 end
