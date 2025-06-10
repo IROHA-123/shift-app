@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   # ──────────────────────────────────────
-  # 2. 確定シフト一覧＆更新 (ConfirmationsController)
+  # 2. 確定シフト一覧＆更新 (ConfirmedController)
   #    - パスだけ confirmed にマッピング
   #    - URL: /manager/confirmed
   # ──────────────────────────────────────
